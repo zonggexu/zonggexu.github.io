@@ -1,4 +1,5 @@
 import Saga
+import Foundation
 import HTML
 
 func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
@@ -22,7 +23,7 @@ func renderPage(context: ItemRenderingContext<PageMetadata>) -> Node {
 func renderHome(body: String) -> Node {
   div {
     div(class: "header") {
-      img(alt: "Loopwerk logo", src: "/static/images/Loopwerk.svg")
+      img(alt: "Loopwerk logo", src: "/static/images/Loopwerk.png")
     }
 
     div(class: "content") {
@@ -44,18 +45,24 @@ create a<br>
         Node.raw(body)
       }
     }
+      div(class: "footer") {
+          p {
+              " "
+          }
+      }
 
-    div(class: "footer") {
-      a(href: "https://www.soundradix.com", title: "Sound Radix") { img(alt: "Sound Radix logo", src: "/static/images/soundradix.svg") }
-      a(href: "https://www.wetransfer.com", title: "WeTransfer") { img(alt: "WeTransfer logo", src: "/static/images/we.svg") }
-      a(href: "https://www.sentry.io", title: "Sentry") { img(alt: "Sentry logo", src: "/static/images/sentry.svg") }
-      a(href: "https://www.unilever.nl", title: "Unilever") { img(alt: "Unilever logo", src: "/static/images/unilever.svg") }
-      a(href: "https://www.last.fm", title: "Last.fm") { img(alt: "Last.fm logo", src: "/static/images/lastfm.svg") }
-      a(href: "https://www.siminn.is", title: "Siminn") { img(alt: "Siminn logo", src: "/static/images/siminn.svg") }
-      a(href: "https://www.cbs.com", title: "CBS") { img(alt: "CBS logo", src: "/static/images/cbs.svg") }
-      a(href: "https://www.metrolyrics.com", title: "Metrolyrics") { img(alt: "Metrolyrics logo", src: "/static/images/metrolyrics.svg") }
-      a(class: "hidden", href: "https://hachyderm.io/@kevinrenskers", rel: "me") { "@kevinrenskers@hachyderm.io" }
-    }
+//    div(class: "footer") {
+//      a(href: "https://www.soundradix.com", title: "Sound Radix") { img(alt: "Sound Radix logo", src: "/static/images/soundradix.svg") }
+//      a(href: "https://www.wetransfer.com", title: "WeTransfer") { img(alt: "WeTransfer logo", src: "/static/images/we.svg") }
+//      a(href: "https://www.sentry.io", title: "Sentry") { img(alt: "Sentry logo", src: "/static/images/sentry.svg") }
+//      a(href: "https://www.unilever.nl", title: "Unilever") { img(alt: "Unilever logo", src: "/static/images/unilever.svg") }
+//      a(href: "https://www.last.fm", title: "Last.fm") { img(alt: "Last.fm logo", src: "/static/images/lastfm.svg") }
+//      a(href: "https://www.siminn.is", title: "Siminn") { img(alt: "Siminn logo", src: "/static/images/siminn.svg") }
+//      a(href: "https://www.cbs.com", title: "CBS") { img(alt: "CBS logo", src: "/static/images/cbs.svg") }
+//      a(href: "https://www.metrolyrics.com", title: "Metrolyrics") { img(alt: "Metrolyrics logo", src: "/static/images/metrolyrics.svg") }
+//      a(class: "hidden", href: "https://hachyderm.io/@kevinrenskers", rel: "me") { "@kevinrenskers@hachyderm.io" }
+//    }
+      
   }
 }
 

@@ -17,8 +17,8 @@
 
 .header img {
   width: 315px;
-  height: 200px;
-  margin-bottom: 60px;
+  height: 315px;
+  margin-bottom: 5px;
 }
 
 .footer {
@@ -45,7 +45,7 @@ h1 b {
   }
 
   .header img {
-    margin-bottom: 100px;
+    margin-bottom: 20px;
   }
 
   nav {
@@ -106,6 +106,7 @@ h1 b {
   }
 }
 
-#site-footer {
-  display: none;
-}
+/*隐藏底部描述*/
+/*#site-footer {*/
+/*  display: none;*/
+/*}*/

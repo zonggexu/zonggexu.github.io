@@ -167,18 +167,19 @@ select {
 /* Colors */
 :root {
   --accent: #f1a948;
-  --page-background: #222831;
+  --page-background: #161616;
   --nav-background: #0e1112;
-  --text-color: #eeeeee;
+  --text-color: #ffffff;
   --secondary-text-color: #999999;
 }
 
 @media screen and (prefers-color-scheme: light) {
   :root {
-    --accent: #f1a948;
-    --page-background: #f5f5f5;
-    --nav-background: #566b78;
-    --text-color: #566b78;
+    --accent: #f85f73;
+    /* 页面背景 */
+    --page-background: #ffffff;
+    --nav-background: #161616;
+    --text-color: #1c1c1e;
     --secondary-text-color: #999999;
   }
 }
@@ -235,7 +236,7 @@ nav img {
 
 nav img {
   height: 30px;
-  margin-right: 12px;
+/*  margin-right: 12px;*/
 }
 
 nav {

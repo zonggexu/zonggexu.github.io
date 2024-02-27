@@ -3,10 +3,17 @@ section: home
 ---
 
 # Home
-I'm Kevin Renskers, a freelance developer with 24 years of experience making interactive apps for the web and mobile plus the backends that drive them.
+我是一位软件开发爱好者，拥有3年开发移动交互应用程序以及驱动这些应用程序的服务器的经验。
 
-I can help with the entire lifecycle of your project: from discussing the idea, looking over wireframes, to building the app or doing code reviews of your existing app.
+这里将会记录关于软件工程的相关知识，计算机科学既壮观又幽美，我会尝试尽自己所能，以最恰当的方式来解释我所了解的某些代码。
 
-Email me at [kevin@loopwerk.io](mailto:kevin@loopwerk.io) to discuss your project!
+ 👋 Hi, I’m Vanguard.
+ ✨ Familiar with Hello World writing in C, C++, Objective-C, Swift, JavaScript (TypeScript).
+ 👀 I’m interested in iOS development.
+ 🌱 I’m currently learning Swift.
+ 💞️ I'm looking for new job opportunities.
+ 📫 Email me at [@zongsen](mailto:397829762@qq.com) to discuss your idea!
+ 🌏 You can access my [@github](https://github.com/zonggexu) for more information.
 
-*"Kevin has a good knowledge of user experience and design, and even his earliest builds were solid and usable. Amazingly, the app was fully fleshed out and crash free so early that we could focus on performance, and even add a few features. Honestly, he's one of the best developers I've ever worked with." - Graham, designer at Last.fm*
+
+*“再长的路,一步步也能走完,再短的路,不迈开双脚也无法到达.” &emsp;&emsp;- Vanguard, developer at Hello.world*

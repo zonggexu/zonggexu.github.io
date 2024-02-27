@@ -49,7 +49,7 @@ func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeCo
       body {
         header {
           nav {
-            img(alt: "Loopwerk logo", height: "30", src: "/static/images/Loopwerk_mark.svg", width: "30")
+            img(alt: "Loopwerk logo", height: "30", src: "/static/images/swiftImage.png", width: "30")
 
             ul {
               li {
@@ -84,7 +84,7 @@ func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeCo
 
           div(id: "site-footer") {
             p {
-              "Copyright © Vanguard 2009-\(Date().description.prefix(4))."
+              "Copyright © Vanguard 2020-\(Date().description.prefix(4))."
             }
             p {
               "Built in Swift using"

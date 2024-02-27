@@ -34,17 +34,17 @@
     --token-regex: #e9c062;
     --token-important: #fd971f;
   }
-
+  /* 代码段颜色配置 */
   @media screen and (prefers-color-scheme: light) {
     :root {
-      --code-background: #dfe1e2;
-      --code-color: #566b78;
-      --token-comment: #39adb5;
-      --token-punctuation: #39adb5;
-      --token-property: #39adb5;
-      --token-keyword: #7c4dff;
+      --code-background: #e4e5ea;
+      --code-color: #0b0b0c;
+      --token-comment: #0b0b0c;
+      --token-punctuation: #0b0b0c;
+      --token-property: #0b0b0c;
+      --token-keyword: #FF1492;
       --token-tag: #e53935;
-      --token-class-name: #6182b8;
+      --token-class-name: #8A2BE2;
       --token-boolean: #99cc99;
       --token-constant: #7c4dff;
       --token-symbol: #7c4dff;
