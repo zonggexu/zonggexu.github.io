@@ -1,0 +1,115 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<author>
+		<name>
+			Kevin Renskers
+		</name>
+	</author>
+	<title type="text">Loopwerk</title>
+	<id>https://www.loopwerk.io/articles/tag/open-source/feed.xml</id>
+	<link href="https://www.loopwerk.io/articles/tag/open-source/feed.xml" rel="self">
+	</link>
+	<updated>2024-02-27T16:12:13Z</updated>
+	<generator uri="https://github.com/loopwerk/Saga">
+		Saga
+	</generator>
+	<entry>
+		<title type="text">Saga 1.0.0 has been released</title>
+		<id>https://www.loopwerk.io/articles/2021/saga-1-released/</id>
+		<link href="https://www.loopwerk.io/articles/2021/saga-1-released/" rel="alternate">
+		</link>
+		<updated>2021-12-11T16:00:00Z</updated>
+		<summary type="text">
+			About ten months ago I wrote that I was confident that the API of Saga wasn&apos;t going to change a lot anymore, and that I&apos;d release 1.0.0. Well, it&apos;s taken a little bit longer than I expected back then, but 1.0.0 has finally been released!
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Automating your changelog and GitHub releases</title>
+		<id>https://www.loopwerk.io/articles/2021/automating-changelog/</id>
+		<link href="https://www.loopwerk.io/articles/2021/automating-changelog/" rel="alternate">
+		</link>
+		<updated>2021-02-19T16:00:00Z</updated>
+		<summary type="text">
+			In a short time I’ve created 25 releases for my static site generator Saga. For each release I’ve manually updated the CHANGELOG.md file, which is a bit tedious and easy to forget. I really wanted to automate this using GitHub Actions, which I was...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Building my own static site generator, part 7: updates &amp; the road to 1.0.0</title>
+		<id>https://www.loopwerk.io/articles/2021/saga-7-updates/</id>
+		<link href="https://www.loopwerk.io/articles/2021/saga-7-updates/" rel="alternate">
+		</link>
+		<updated>2021-02-12T16:00:00Z</updated>
+		<summary type="text">
+			In the past few days I’ve made some pretty substantial improvements to Saga, to make it work for me and my website, which is now built using Saga.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Building my own static site generator, part 6: replacing SwiftMarkdown</title>
+		<id>https://www.loopwerk.io/articles/2021/saga-6-replacing-swiftmarkdown/</id>
+		<link href="https://www.loopwerk.io/articles/2021/saga-6-replacing-swiftmarkdown/" rel="alternate">
+		</link>
+		<updated>2021-02-08T16:00:00Z</updated>
+		<summary type="text">
+			I&apos;ve already replaced my own SwiftMarkdown package...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Building my own static site generator, part 5: replacing Ink and Splash</title>
+		<id>https://www.loopwerk.io/articles/2021/saga-5-replacing-ink/</id>
+		<link href="https://www.loopwerk.io/articles/2021/saga-5-replacing-ink/" rel="alternate">
+		</link>
+		<updated>2021-02-07T16:00:00Z</updated>
+		<summary type="text">
+			I&apos;ve replaced the Ink and Splash dependencies with my own SwiftMarkdown package.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Building my own static site generator, part 4: a complete redesign</title>
+		<id>https://www.loopwerk.io/articles/2021/saga-4-complete-redesign/</id>
+		<link href="https://www.loopwerk.io/articles/2021/saga-4-complete-redesign/" rel="alternate">
+		</link>
+		<updated>2021-02-02T16:00:00Z</updated>
+		<summary type="text">
+			An unexpectedly quick fourth article about Saga, after a complete redesign of the API.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Building my own static site generator, part 3: thoughts so far</title>
+		<id>https://www.loopwerk.io/articles/2021/saga-3-thoughts-so-far/</id>
+		<link href="https://www.loopwerk.io/articles/2021/saga-3-thoughts-so-far/" rel="alternate">
+		</link>
+		<updated>2021-02-01T16:00:00Z</updated>
+		<summary type="text">
+			In the third and final part of this series about Saga I&apos;m looking at the pros and cons of the current system and what I might want to change.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Building my own static site generator, part 2: API design</title>
+		<id>https://www.loopwerk.io/articles/2021/saga-2-api-design/</id>
+		<link href="https://www.loopwerk.io/articles/2021/saga-2-api-design/" rel="alternate">
+		</link>
+		<updated>2021-01-30T16:00:00Z</updated>
+		<summary type="text">
+			Part 2, where I&apos;m looking back at the current API of Saga.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Building my own static site generator, part 1: inspiration &amp; goals</title>
+		<id>https://www.loopwerk.io/articles/2021/saga-1-inspiration/</id>
+		<link href="https://www.loopwerk.io/articles/2021/saga-1-inspiration/" rel="alternate">
+		</link>
+		<updated>2021-01-29T16:00:00Z</updated>
+		<summary type="text">
+			In part 1 of a series of articles I&apos;m looking at the inspiration behind my static site generator Saga, now available on Github.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">JobControl is six years old</title>
+		<id>https://www.loopwerk.io/articles/2013/dmmjobcontrol-six-years-old/</id>
+		<link href="https://www.loopwerk.io/articles/2013/dmmjobcontrol-six-years-old/" rel="alternate">
+		</link>
+		<updated>2013-04-09T16:00:00Z</updated>
+		<summary type="text">
+			I absolutely love open source software. I use all kinds of third party libraries for iOS for example (installed via the open source CocoaPods project of course), which makes my life as a developer a whole lot easier. And in return I open source some...
+		</summary>
+	</entry>
+</feed>

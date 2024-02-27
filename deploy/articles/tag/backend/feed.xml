@@ -1,0 +1,85 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<author>
+		<name>
+			Kevin Renskers
+		</name>
+	</author>
+	<title type="text">Loopwerk</title>
+	<id>https://www.loopwerk.io/articles/tag/backend/feed.xml</id>
+	<link href="https://www.loopwerk.io/articles/tag/backend/feed.xml" rel="self">
+	</link>
+	<updated>2024-02-27T16:12:13Z</updated>
+	<generator uri="https://github.com/loopwerk/Saga">
+		Saga
+	</generator>
+	<entry>
+		<title type="text">Vapor 4 vs. Django REST Framework</title>
+		<id>https://www.loopwerk.io/articles/2021/vapor4-vs-drf/</id>
+		<link href="https://www.loopwerk.io/articles/2021/vapor4-vs-drf/" rel="alternate">
+		</link>
+		<updated>2021-08-25T16:00:00Z</updated>
+		<summary type="text">
+			Over two years ago I wrote an article where I compared Vapor 3 to Django REST Framework. It&apos;s time for a rematch with Vapor 4.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">My one big complaint working with Vapor 4</title>
+		<id>https://www.loopwerk.io/articles/2021/one-big-complaint-vapor4/</id>
+		<link href="https://www.loopwerk.io/articles/2021/one-big-complaint-vapor4/" rel="alternate">
+		</link>
+		<updated>2021-07-16T16:00:00Z</updated>
+		<summary type="text">
+			I&apos;m trying out Vapor 4 for a side project, and one thing that I am constantly running into is the amount of boilerplate and copy-pasted code. Are there no better solutions for this?
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Clean up Firestore and Storage when deleting a document</title>
+		<id>https://www.loopwerk.io/articles/2020/clean-up-firestore/</id>
+		<link href="https://www.loopwerk.io/articles/2020/clean-up-firestore/" rel="alternate">
+		</link>
+		<updated>2020-06-13T16:00:00Z</updated>
+		<summary type="text">
+			When you delete a document in Firestore, its subcollections and their documents are not automatically recursively deleted. Here is a simple Cloud Function that takes care of it.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">After Vapor and Django comes.. Firestore</title>
+		<id>https://www.loopwerk.io/articles/2020/firestore/</id>
+		<link href="https://www.loopwerk.io/articles/2020/firestore/" rel="alternate">
+		</link>
+		<updated>2020-06-06T16:00:00Z</updated>
+		<summary type="text">
+			Over a year ago I wrote that I started working on a brand new side project, and that I was building the backend for that project. I started with Vapor 3, then made the same backend in Django REST Framework, and couldn&apos;t really choose between the two...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Vapor 3 vs. Django REST Framework</title>
+		<id>https://www.loopwerk.io/articles/2019/vapor-vs-drf/</id>
+		<link href="https://www.loopwerk.io/articles/2019/vapor-vs-drf/" rel="alternate">
+		</link>
+		<updated>2019-04-13T16:00:00Z</updated>
+		<summary type="text">
+			A little while ago I wrote about starting a new side project, where I was using Vapor 3 to build the backend. My initial impressions were extremely positive, but I ended up running into a few issues that made working with the framework a little bit...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Struggles with Vapor 3</title>
+		<id>https://www.loopwerk.io/articles/2019/vapor/</id>
+		<link href="https://www.loopwerk.io/articles/2019/vapor/" rel="alternate">
+		</link>
+		<updated>2019-03-19T16:00:00Z</updated>
+		<summary type="text">
+			I am working on my very first “real” side project since 2006! Not counting a bunch of open source projects I started and maintained since 2006, no, I mean a real user-facing project with a backend, website, iOS app, the whole shebang. It’s been a...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Searching for a next gen back end</title>
+		<id>https://www.loopwerk.io/articles/2016/next-gen-backend/</id>
+		<link href="https://www.loopwerk.io/articles/2016/next-gen-backend/" rel="alternate">
+		</link>
+		<updated>2016-11-23T16:00:00Z</updated>
+		<summary type="text">
+			A while ago I started to think: if I were to build a brand new web app plus back end today, what would I use for the back end, and how would the client talk to it? So far my APIs have been very standard REST affairs: endpoints per model that get/save...
+		</summary>
+	</entry>
+</feed>

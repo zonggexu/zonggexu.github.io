@@ -1,0 +1,56 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<author>
+		<name>
+			Kevin Renskers
+		</name>
+	</author>
+	<title type="text">Loopwerk</title>
+	<id>https://www.loopwerk.io/articles/tag/combine/feed.xml</id>
+	<link href="https://www.loopwerk.io/articles/tag/combine/feed.xml" rel="self">
+	</link>
+	<updated>2024-02-27T16:12:13Z</updated>
+	<generator uri="https://github.com/loopwerk/Saga">
+		Saga
+	</generator>
+	<entry>
+		<title type="text">Mentee Question 4: When to use PassthroughSubject and CurrentValueSubject?</title>
+		<id>https://www.loopwerk.io/articles/2021/faq-passthroughsubject-currentvaluesubject/</id>
+		<link href="https://www.loopwerk.io/articles/2021/faq-passthroughsubject-currentvaluesubject/" rel="alternate">
+		</link>
+		<updated>2021-02-24T16:00:00Z</updated>
+		<summary type="text">
+			That’s a great question! And actually one I asked myself too, when I just got started with Combine. Let’s first explain what PassthroughSubject and CurrentValueSubject are though. 
+Subjects are a kind of publisher that you can subscribe to, but can...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Mentee Question 3: How to know when multiple publishers completed?</title>
+		<id>https://www.loopwerk.io/articles/2021/faq-promise-all-combine/</id>
+		<link href="https://www.loopwerk.io/articles/2021/faq-promise-all-combine/" rel="alternate">
+		</link>
+		<updated>2021-02-21T16:00:00Z</updated>
+		<summary type="text">
+			In JavaScript-world, it&apos;s really easy to know when multiple promises completed: just use Promise.all. How do you do the same thing in Combine?
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Exploring two-way databinding solutions in UIKit</title>
+		<id>https://www.loopwerk.io/articles/2020/two-way-databinding-uikit/</id>
+		<link href="https://www.loopwerk.io/articles/2020/two-way-databinding-uikit/" rel="alternate">
+		</link>
+		<updated>2020-07-09T16:00:00Z</updated>
+		<summary type="text">
+			With SwiftUI we have the @Binding property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it&apos;s slightly less easy. Let&apos;s explore some solutions.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Book review: Practical Combine</title>
+		<id>https://www.loopwerk.io/articles/2020/book-review-practical-combine/</id>
+		<link href="https://www.loopwerk.io/articles/2020/book-review-practical-combine/" rel="alternate">
+		</link>
+		<updated>2020-06-28T16:00:00Z</updated>
+		<summary type="text">
+			It&apos;s almost exactly 10 years since I wrote my last book review. Time flies! Also, it makes me realize that the way I&apos;ve been learning has changed dramatically. I am much more guided by autocomplete and documentation within Xcode, and in-depth articles and videos about one particular topic, instead of reading books.
+		</summary>
+	</entry>
+</feed>

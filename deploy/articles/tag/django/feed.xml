@@ -1,0 +1,172 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<author>
+		<name>
+			Kevin Renskers
+		</name>
+	</author>
+	<title type="text">Loopwerk</title>
+	<id>https://www.loopwerk.io/articles/tag/django/feed.xml</id>
+	<link href="https://www.loopwerk.io/articles/tag/django/feed.xml" rel="self">
+	</link>
+	<updated>2024-02-27T16:12:13Z</updated>
+	<generator uri="https://github.com/loopwerk/Saga">
+		Saga
+	</generator>
+	<entry>
+		<title type="text">Deleting anonymous users&apos; baskets when their sessions expire</title>
+		<id>https://www.loopwerk.io/articles/2023/django-sessions-pre-delete/</id>
+		<link href="https://www.loopwerk.io/articles/2023/django-sessions-pre-delete/" rel="alternate">
+		</link>
+		<updated>2023-10-24T16:00:00Z</updated>
+		<summary type="text">
+			How do you delete baskets belonging to anonymous users when their sessions expires? It wasn&apos;t quite as simple as I thought.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Adding custom actions to the Django Admin</title>
+		<id>https://www.loopwerk.io/articles/2023/adding-custom-actions-django-admin/</id>
+		<link href="https://www.loopwerk.io/articles/2023/adding-custom-actions-django-admin/" rel="alternate">
+		</link>
+		<updated>2023-07-19T16:00:00Z</updated>
+		<summary type="text">
+			Let&apos;s add custom actions to Django&apos;s admin site - but to the change form, not the list view.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Setting up a Debian 11 server for SvelteKit and Django</title>
+		<id>https://www.loopwerk.io/articles/2023/setting-up-debian-11/</id>
+		<link href="https://www.loopwerk.io/articles/2023/setting-up-debian-11/" rel="alternate">
+		</link>
+		<updated>2023-03-03T16:00:00Z</updated>
+		<summary type="text">
+			I recently had to set up a brand new server for a website running on SvelteKit and its API running on Django. I am a software developer and setting up servers and hosting isn&apos;t something I normally do, so I followed a bunch of different tutorials. In this article I want to combine all these tutorials, mostly for future me, but hopefully you&apos;ll find it useful as well.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Vapor 4 vs. Django REST Framework</title>
+		<id>https://www.loopwerk.io/articles/2021/vapor4-vs-drf/</id>
+		<link href="https://www.loopwerk.io/articles/2021/vapor4-vs-drf/" rel="alternate">
+		</link>
+		<updated>2021-08-25T16:00:00Z</updated>
+		<summary type="text">
+			Over two years ago I wrote an article where I compared Vapor 3 to Django REST Framework. It&apos;s time for a rematch with Vapor 4.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Vapor 3 vs. Django REST Framework</title>
+		<id>https://www.loopwerk.io/articles/2019/vapor-vs-drf/</id>
+		<link href="https://www.loopwerk.io/articles/2019/vapor-vs-drf/" rel="alternate">
+		</link>
+		<updated>2019-04-13T16:00:00Z</updated>
+		<summary type="text">
+			A little while ago I wrote about starting a new side project, where I was using Vapor 3 to build the backend. My initial impressions were extremely positive, but I ended up running into a few issues that made working with the framework a little bit...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Review roundup: the search for the perfect Python IDE (for Django)</title>
+		<id>https://www.loopwerk.io/articles/2011/search-perfect-python-ide-django/</id>
+		<link href="https://www.loopwerk.io/articles/2011/search-perfect-python-ide-django/" rel="alternate">
+		</link>
+		<updated>2011-04-04T16:00:00Z</updated>
+		<summary type="text">
+			When I first started working with Python in September 2009, I needed a good IDE. I quickly settled for Netbeans and I’ve been using it ever since, even though there are some things that really irritate me. But at least it works, and fits well in my...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Django-CMS backend usability</title>
+		<id>https://www.loopwerk.io/articles/2011/django-cms-backend-usability/</id>
+		<link href="https://www.loopwerk.io/articles/2011/django-cms-backend-usability/" rel="alternate">
+		</link>
+		<updated>2011-01-28T16:00:00Z</updated>
+		<summary type="text">
+			Yesterday I wrote an article comparing Django-CMS, FeinCMS and Mezzanine. One of the conclusions was that while Django-CMS is the best CMS on paper, I don’t like its backend interface that much. I thought it would be a good idea to properly explain...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Django-CMS vs. FeinCMS vs. Mezzanine</title>
+		<id>https://www.loopwerk.io/articles/2011/django-cms-vs-feincms-vs-mezzanine/</id>
+		<link href="https://www.loopwerk.io/articles/2011/django-cms-vs-feincms-vs-mezzanine/" rel="alternate">
+		</link>
+		<updated>2011-01-27T16:00:00Z</updated>
+		<summary type="text">
+			When you need a content management system for Django, there is enough choice. Maybe even too much: the very helpful site djangopackages.com lists 13. Some are mature and very feature-complete, while others are barely more than a basic model and a...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Looking for a Django CMS which suits my needs</title>
+		<id>https://www.loopwerk.io/articles/2011/looking-for-django-cms/</id>
+		<link href="https://www.loopwerk.io/articles/2011/looking-for-django-cms/" rel="alternate">
+		</link>
+		<updated>2011-01-16T16:00:00Z</updated>
+		<summary type="text">
+			I need to build a content-based website for a client, in Django. Well, that’s easy right? Pick one of the content management systems available, build some templates and css, and ta-da, done. Since I have used Django-CMS in previous projects, that...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Serving 5000 pages per second with Django</title>
+		<id>https://www.loopwerk.io/articles/2010/serving-5000-pages-second-django/</id>
+		<link href="https://www.loopwerk.io/articles/2010/serving-5000-pages-second-django/" rel="alternate">
+		</link>
+		<updated>2010-11-15T16:00:00Z</updated>
+		<summary type="text">
+			Okay, this website wasn’t slow and will never need to serve 5000 pages per second, but hey, it’s possible now! Oh right, and it was fun to play around with a nice caching system. 
+Almost everything on mixedCase.nl needs to come from the database: the...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Django 1.2, a great release</title>
+		<id>https://www.loopwerk.io/articles/2010/django-12-great-release/</id>
+		<link href="https://www.loopwerk.io/articles/2010/django-12-great-release/" rel="alternate">
+		</link>
+		<updated>2010-03-04T16:00:00Z</updated>
+		<summary type="text">
+			I’ve been playing with the Beta release of Django 1.2 (get it here) and I love many of the new improvements. I’d like to list the best and biggest new features, and also some problems I encountered while using it. 
+Smarter if tag 
+I was already using...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Making Django suck less</title>
+		<id>https://www.loopwerk.io/articles/2009/making-django-suck-less/</id>
+		<link href="https://www.loopwerk.io/articles/2009/making-django-suck-less/" rel="alternate">
+		</link>
+		<updated>2009-12-10T16:00:00Z</updated>
+		<summary type="text">
+			Or, “How to make Django even better then it already is”. Because it really isn’t as bad as the title implies :) 
+In my previous post Things I hate about Python and Django, I said that one of the things I “hate” about Django is its template language....
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Things I hate about Python and Django</title>
+		<id>https://www.loopwerk.io/articles/2009/things-i-hate-about-python-and-django/</id>
+		<link href="https://www.loopwerk.io/articles/2009/things-i-hate-about-python-and-django/" rel="alternate">
+		</link>
+		<updated>2009-12-05T16:00:00Z</updated>
+		<summary type="text">
+			I have been a PHP programmer for the last 9 years, and only in September of 2009 I switched to Python and the Django framework. While I really love the Python language and the Django framework (especially compared to something like the Zend PHP...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Using the Google Visualization API in Django</title>
+		<id>https://www.loopwerk.io/articles/2009/using-google-visualization-api-django/</id>
+		<link href="https://www.loopwerk.io/articles/2009/using-google-visualization-api-django/" rel="alternate">
+		</link>
+		<updated>2009-11-28T16:00:00Z</updated>
+		<summary type="text">
+			In a project I am working on, I need to show a lot of graphs and charts. Together with the client we chose to use the Visualization API by Google, which provides a Python library, offers many different kinds of charts and very important: the data is...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">How to dynamically add fields to a Django model</title>
+		<id>https://www.loopwerk.io/articles/2009/how-dynamically-add-fields-django-model/</id>
+		<link href="https://www.loopwerk.io/articles/2009/how-dynamically-add-fields-django-model/" rel="alternate">
+		</link>
+		<updated>2009-11-25T16:00:00Z</updated>
+		<summary type="text">
+			For a project I needed to create a Django model from a list of fields that were defined somewhere else. It took me hours to get this to work, so to save you the time, here is the solution: 
+fields = [&apos;field_a&apos;, &apos;field_b&apos;, &apos;field_c&apos;]
+
+# the base model...
+		</summary>
+	</entry>
+</feed>

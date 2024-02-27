@@ -1,0 +1,221 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<author>
+		<name>
+			Kevin Renskers
+		</name>
+	</author>
+	<title type="text">Loopwerk</title>
+	<id>https://www.loopwerk.io/articles/tag/ios/feed.xml</id>
+	<link href="https://www.loopwerk.io/articles/tag/ios/feed.xml" rel="self">
+	</link>
+	<updated>2024-02-27T16:12:13Z</updated>
+	<generator uri="https://github.com/loopwerk/Saga">
+		Saga
+	</generator>
+	<entry>
+		<title type="text">Interview with proglib.io</title>
+		<id>https://www.loopwerk.io/articles/2021/interview-proglib/</id>
+		<link href="https://www.loopwerk.io/articles/2021/interview-proglib/" rel="alternate">
+		</link>
+		<updated>2021-07-10T16:00:00Z</updated>
+		<summary type="text">
+			Recently I was interviewed for the Russian IT website proglib.io. Since it might be interesting for non-Russian speakers, here it is in the original English version.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">WWDC21 keynote review</title>
+		<id>https://www.loopwerk.io/articles/2021/wwdc21-review/</id>
+		<link href="https://www.loopwerk.io/articles/2021/wwdc21-review/" rel="alternate">
+		</link>
+		<updated>2021-06-06T16:00:00Z</updated>
+		<summary type="text">
+			A new year, a new WWDC with once again new iOS, iPadOS, macOS and watchOS releases. If you ask me, I think yearly releases are overkill and really not necessary; I’d rather have Apple split off features like Weather, Maps, Notes and more into...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Mentee Question 5: What&apos;s the deal with coordinators?</title>
+		<id>https://www.loopwerk.io/articles/2021/faq-coordinators/</id>
+		<link href="https://www.loopwerk.io/articles/2021/faq-coordinators/" rel="alternate">
+		</link>
+		<updated>2021-03-09T16:00:00Z</updated>
+		<summary type="text">
+			A few weeks while ago in my how to get started article I mentioned coordinators in the “What architecture should I use?” section, and how they allow you to decouple your view controllers from one another, and improve the way you can test your code....
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Mentee Question 4: When to use PassthroughSubject and CurrentValueSubject?</title>
+		<id>https://www.loopwerk.io/articles/2021/faq-passthroughsubject-currentvaluesubject/</id>
+		<link href="https://www.loopwerk.io/articles/2021/faq-passthroughsubject-currentvaluesubject/" rel="alternate">
+		</link>
+		<updated>2021-02-24T16:00:00Z</updated>
+		<summary type="text">
+			That’s a great question! And actually one I asked myself too, when I just got started with Combine. Let’s first explain what PassthroughSubject and CurrentValueSubject are though. 
+Subjects are a kind of publisher that you can subscribe to, but can...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Mentee Question 3: How to know when multiple publishers completed?</title>
+		<id>https://www.loopwerk.io/articles/2021/faq-promise-all-combine/</id>
+		<link href="https://www.loopwerk.io/articles/2021/faq-promise-all-combine/" rel="alternate">
+		</link>
+		<updated>2021-02-21T16:00:00Z</updated>
+		<summary type="text">
+			In JavaScript-world, it&apos;s really easy to know when multiple promises completed: just use Promise.all. How do you do the same thing in Combine?
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Mentee Question 2: How to get started</title>
+		<id>https://www.loopwerk.io/articles/2021/faq-getting-started/</id>
+		<link href="https://www.loopwerk.io/articles/2021/faq-getting-started/" rel="alternate">
+		</link>
+		<updated>2021-01-20T16:00:00Z</updated>
+		<summary type="text">
+			Resources for learning Swift and UIKit, what to build first, opinions on Unit Testing, and more.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Mentee Question 1: UIKit or SwiftUI</title>
+		<id>https://www.loopwerk.io/articles/2021/faq-uikit-vs-swiftui/</id>
+		<link href="https://www.loopwerk.io/articles/2021/faq-uikit-vs-swiftui/" rel="alternate">
+		</link>
+		<updated>2021-01-19T16:00:00Z</updated>
+		<summary type="text">
+			My take on the very common question &quot;What should I learn or focus on? UIKit or SwiftUI?&quot;
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Book review: Thinking in SwiftUI</title>
+		<id>https://www.loopwerk.io/articles/2020/book-review-thinking-in-swiftui/</id>
+		<link href="https://www.loopwerk.io/articles/2020/book-review-thinking-in-swiftui/" rel="alternate">
+		</link>
+		<updated>2020-09-18T16:00:00Z</updated>
+		<summary type="text">
+			A while ago I asked on Twitter which Swift-related book I should review next, and overwhelmingly Thinking in SwiftUI by the objc.io guys was chosen. An excellent choice!
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Exploring two-way databinding solutions in UIKit</title>
+		<id>https://www.loopwerk.io/articles/2020/two-way-databinding-uikit/</id>
+		<link href="https://www.loopwerk.io/articles/2020/two-way-databinding-uikit/" rel="alternate">
+		</link>
+		<updated>2020-07-09T16:00:00Z</updated>
+		<summary type="text">
+			With SwiftUI we have the @Binding property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it&apos;s slightly less easy. Let&apos;s explore some solutions.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Book review: Practical Combine</title>
+		<id>https://www.loopwerk.io/articles/2020/book-review-practical-combine/</id>
+		<link href="https://www.loopwerk.io/articles/2020/book-review-practical-combine/" rel="alternate">
+		</link>
+		<updated>2020-06-28T16:00:00Z</updated>
+		<summary type="text">
+			It&apos;s almost exactly 10 years since I wrote my last book review. Time flies! Also, it makes me realize that the way I&apos;ve been learning has changed dramatically. I am much more guided by autocomplete and documentation within Xcode, and in-depth articles and videos about one particular topic, instead of reading books.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">WWDC20 review</title>
+		<id>https://www.loopwerk.io/articles/2020/wwdc-review/</id>
+		<link href="https://www.loopwerk.io/articles/2020/wwdc-review/" rel="alternate">
+		</link>
+		<updated>2020-06-22T16:00:00Z</updated>
+		<summary type="text">
+			A quick review of the keynote and State of the Union talks. Let&apos;s see which of my wishes have been fulfilled, and which SwiftUI problems have been solved.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">A review of SwiftUI problems</title>
+		<id>https://www.loopwerk.io/articles/2020/swiftui-review/</id>
+		<link href="https://www.loopwerk.io/articles/2020/swiftui-review/" rel="alternate">
+		</link>
+		<updated>2020-06-20T16:00:00Z</updated>
+		<summary type="text">
+			I&apos;ve been working with SwiftUI for almost half a year now, and in that time I&apos;ve learned a lot. I love a lot about it, but there are also so many bugs and issues that need workarounds that it&apos;s kind of maddening.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">WWDC20 wishlist</title>
+		<id>https://www.loopwerk.io/articles/2020/wwdc20-wishlist/</id>
+		<link href="https://www.loopwerk.io/articles/2020/wwdc20-wishlist/" rel="alternate">
+		</link>
+		<updated>2020-06-17T16:00:00Z</updated>
+		<summary type="text">
+			WWDC is just around the corner, and we&apos;re all waiting like little kids at Christmas to see what Apple is going to announce. Most of us also are hoping for specific changes, here are my top wishes.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Connecting Storekit to Firestore via Cloud Functions and webhooks</title>
+		<id>https://www.loopwerk.io/articles/2020/storekit-webhooks-firestore/</id>
+		<link href="https://www.loopwerk.io/articles/2020/storekit-webhooks-firestore/" rel="alternate">
+		</link>
+		<updated>2020-06-14T16:00:00Z</updated>
+		<summary type="text">
+			I&apos;ve recently added subscriptions to my Critical Notes iOS app, using Apple&apos;s StoreKit. Here is how I hooked it all up to Firestore including server-side receipt validation.
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Review roundup: iOS debug tools and inspectors</title>
+		<id>https://www.loopwerk.io/articles/2013/review-ios-debuggers/</id>
+		<link href="https://www.loopwerk.io/articles/2013/review-ios-debuggers/" rel="alternate">
+		</link>
+		<updated>2013-06-03T16:00:00Z</updated>
+		<summary type="text">
+			All of a sudden it seems there’s a big effort to create debugging tools for iOS developers. Some are free, they all have different features… Time for a comparison. 
+PonyDebugger 
+“Remote network and data debugging for your native iOS app using Chrome...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">iOS development: three years later</title>
+		<id>https://www.loopwerk.io/articles/2013/ios-development-three-years-later/</id>
+		<link href="https://www.loopwerk.io/articles/2013/ios-development-three-years-later/" rel="alternate">
+		</link>
+		<updated>2013-05-19T16:00:00Z</updated>
+		<summary type="text">
+			In April 2010 I started to work on my very first iPhone app. A new language, a new IDE, a completely new way of thinking about development (threads! memory! crashes!), it was very exciting. In these three years quite a lot has happened to us iOS...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">Apple&apos;s worst iOS framework: MediaPlayer</title>
+		<id>https://www.loopwerk.io/articles/2013/mediaplayer-apples-worst-framework/</id>
+		<link href="https://www.loopwerk.io/articles/2013/mediaplayer-apples-worst-framework/" rel="alternate">
+		</link>
+		<updated>2013-01-28T16:00:00Z</updated>
+		<summary type="text">
+			When I started to work on Last.fm’s Scrobbler for iOS, I though it would be quite an easy app to create. After all, it’s basically a couple of lists of artists, albums and tracks, and all actual music playback will be done using the MediaPlayer...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">MPVolumeView (Airplay button) on an UIBarButtonItem</title>
+		<id>https://www.loopwerk.io/articles/2012/mpvolumeview-uibarbuttonitem/</id>
+		<link href="https://www.loopwerk.io/articles/2012/mpvolumeview-uibarbuttonitem/" rel="alternate">
+		</link>
+		<updated>2012-10-11T16:00:00Z</updated>
+		<summary type="text">
+			In an app I’m currently building, the client wants an Airplay button in the navigation bar, with a nice background like so: 
+ 
+After trying some things, the solution seems to be to loop over the subviews. It feels a bit hacky, but works perfectly:...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">My wishes for iOS 5</title>
+		<id>https://www.loopwerk.io/articles/2011/my-wishes-for-ios5/</id>
+		<link href="https://www.loopwerk.io/articles/2011/my-wishes-for-ios5/" rel="alternate">
+		</link>
+		<updated>2011-02-15T16:00:00Z</updated>
+		<summary type="text">
+			In June 2010 Apple finally added multitasking to the iPhone (the iPad had to wait ’til November to get iOS version 4) and with this resolved one of my biggest complaints about the operating system. And while I really enjoy iOS on the iPhone and the...
+		</summary>
+	</entry>
+	<entry>
+		<title type="text">My thoughts after having completed my first Appcelerator project</title>
+		<id>https://www.loopwerk.io/articles/2010/my-thoughts-after-having-completed-my-first-appcelerator-projects/</id>
+		<link href="https://www.loopwerk.io/articles/2010/my-thoughts-after-having-completed-my-first-appcelerator-projects/" rel="alternate">
+		</link>
+		<updated>2010-12-01T16:00:00Z</updated>
+		<summary type="text">
+			A while ago I set out to build my third mobile application. Only this time the client wanted not only an iPhone app, but one for Android too. So that’s why I turned to Appcelerator once again, after my failed first attempt. 
+In case you don’t know...
+		</summary>
+	</entry>
+</feed>
