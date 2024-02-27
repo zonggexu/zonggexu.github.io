@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: 2023 in review
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2023/2023-in-review/" rel="canonical"/>
+		<meta content="Another year in review - even though it feels like I wrote the previous one not so long ago. Time flies and it’s flying faster and faster each and every year." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2023-12-29-2023-in-review.png" name="twitter:image"/>
+		<meta content="2023 in review" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2023/2023-in-review/" name="og:url"/>
+		<meta content="2023 in review" name="og:title"/>
+		<meta content="Another year in review - even though it feels like I wrote the previous one not so long ago. Time flies and it’s flying faster and faster each and every year." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2023-12-29-2023-in-review.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					2023 in review
+				</h1>
+				<div class="article_info">
+					<span class="time">December 29,
+						<a href="/articles/2023/">2023</a></span>1259 words, posted in <a href="/articles/tag/random/">random</a>
+				</div>
+				<div class="article_content">
+					<p>Another year in review - even though it feels like I wrote the previous one not so long ago. Time flies and it’s flying faster and faster each and every year. I’m starting to feel old to be honest and that “I’ll have time for it in the future” feeling I always had when I was younger is starting to disappear. I now choose what I want to spend my time on more carefully - that goes for the projects I work on, the clients I work with, what I do in my free time and with whom, etc. More focus on the meaningful things and the things that bring joy, drop the nasty habits and unenjoyable time sinks.</p> 
+<h2><a name="work"></a>Work</h2> 
+<p>In January I started working with <a href="https://www.soundradix.com" target="_blank" rel="nofollow">Sound Radix</a>, an Emmy-award winning software studio that makes plugins for sound engineers and editors. I took over development of their frontend and backend, written using SvelteKit and TypeScript, and Django and Python, respectively. It’s a company that deeply cares about their users and their craftsmanship, and I immediately felt at home.</p> 
+<p>Most of the year has been all about cleaning up the site and API. The codebase is rather old (it got started in 2016) with multiple architectural changes over the years, so as you can imagine there’s a lot of cruft that was ready to be cleaned up. I removed about 450,000 lines of code, while “only” adding about 130,000 lines.</p> 
+<p>Much of the cleanup on the website was cleaning up old unused HTML and CSS. For example there were three CSS libraries in use across different pages, and now everything is streamlined using a single design guide and using TailwindCSS everywhere.</p> 
+<p>At the moment I’m busy getting rid of oscar, oscar-api and django-oscar-paypal in favor of a custom built shop backend. The performance of the current shop is rather bad: adding any item to your basket means having to refetch your basket and all shop items because prices might have been changed due to offers becoming valid or invalid when you added something in your basket. And sadly Oscar is extremely inefficient when it comes to calculating shop prices and their offers, resulting in multiple endpoints that take literal seconds to return their data. If you have multiple items in your basket, fetching the basket can take up to five seconds for example. By moving towards our own shop code we can build exactly the features we want for our use case, nothing more, and we can optimize every endpoint to really speed up the shop. The average page load time on the website is now 2.2 seconds which is expected to drop to 0.5 seconds with the new shop.</p> 
+<h2><a name="open-source-projects"></a>Open source projects</h2> 
+<p>In 2021 I started a bunch of open source projects, in 2022 I did almost no open source work, and this year was more of the same: almost no open source work happened. The existing projects are humming along nicely, they’re mature and feature-complete. <a href="https://github.com/loopwerk/Saga" target="_blank" rel="nofollow">Saga</a> did get a new release this year, as did <a href="https://github.com/loopwerk/tag-changelog" target="_blank" rel="nofollow">tag-changelog</a>, but nothing really worth mentioning here.</p> 
+<h2><a name="side-projects"></a>Side projects</h2> 
+<p><a href="https://www.critical-notes.com" target="_blank" rel="nofollow">Critical Notes</a> got moved to the back burner a little bit this year. The biggest reason for this is that the tech stack is exactly the same as my day job: SvelteKit and Django. While it’s very useful to be able to reuse learnings from one project to the next, it also means that the side project feels like work rather than a fun thing to tinker with in my spare time. It’s quite hard to get motived to do the exact same work after work hours.</p> 
+<p>Still, there were four sizable updates to the site this year, implementing six requested features and a <a href="https://www.critical-notes.com/changelog" target="_blank" rel="nofollow">bunch of other upgrades and improvements</a>.</p> 
+<p>Some stats from 2022:</p> 
+<ul> 
+ <li>I made €1077 from 33 subscribers</li> 
+ <li>A little more than 2000 users</li> 
+ <li>15k unique visitors and 242k total page views</li> 
+</ul> 
+<p>And the same stats for 2023:</p> 
+<ul> 
+ <li>I made €2302 from 71 subscribers</li> 
+ <li>Over 4000 users</li> 
+ <li>28k unique visitors and 393k total page views</li> 
+</ul> 
+<p>These are really nice numbers and I hope this line continues in 2024. The income would have to increase substantially to make it possible for me to work more regularly on Critical Notes - still hoping to find a marketing wizard who wants to join! I’m convinced that with the right person getting the word out it could turn into a much bigger project, making it possible to work one day a week on this, for example.</p> 
+<h2><a name="mentorship-program"></a>Mentorship program</h2> 
+<p>I have not mentored anyone this year, I’m sorry to say. I think it’s safe to say that the mentorship program has come to an end, at least for the foreseeable future. One big reason is that I am just not so interested in iOS and Swift anymore. I find it a drag to keep up with the constant language and platform changes, which I feel I would need to do in order to mentor anyone. My interests have shifted away from Apple and their walled gardens back towards the open web. This began in 2020 when I started the Critical Notes project and only got stronger over the years. At the end of 2022 I really wanted to take a break from iOS development and I started to look for a long-term web project, which of course I found with Sound Radix.</p> 
+<p>Maybe the mentorship program will make its comeback with a focus on SvelteKit, but for now I rather spend my free time on other things like my girlfriend, my friends, and my family.</p> 
+<h2><a name="personal-stuff"></a>Personal stuff</h2> 
+<p>2023 was a much happier year than 2022, which was <a href="/articles/2022/2022-in-review/">a year of loss for me</a>. I had multiple weekends away with my girlfriend all throughout the year, plus a week away on one of the Dutch islands in the summer, as well as an eight day holiday to Iceland at the end of the year. I bought a new car, a VW Golf GTE, which then opened my eyes to the joys of electric driving. Sadly the Golf’s battery is only good for about 40 kilometers, but most of my trips are pretty short anyway, and I can charge at home using my own solar panels. My next car is definitely going to be fully electric! Most likely not a Tesla; we rented one in Iceland and were not impressed by its build quality, comfort, or software (but that deserves its own article).</p> 
+<p>Oh yeah, I stopped eating potato chips in the summer, and I haven’t had a single chip since June 24. Cholesterol, high blood pressure, weight.. it all needs improving and this is one addiction less, hooray!</p> 
+<h2><a name="games-of-the-year"></a>Games of the year</h2> 
+<p>This year I made a lot more times to play games, something I always used to love to do, but which was getting less and less priority as the years went on. I played a bunch of games this year, with my personal top five being:</p> 
+<ol> 
+ <li>Baldur’s Gate 3</li> 
+ <li>Cyberpunk 2077 (with the DLC)</li> 
+ <li>Elden Ring</li> 
+ <li>Diablo 4</li> 
+ <li>Horizon Zero Down</li> 
+</ol> 
+<p>Bust of the year was Starfield. What a letdown.</p> 
+<h2><a name="2024-resolutions"></a>2024 resolutions</h2> 
+<p>I want to get my C1 driving license, to be able to drive a big motorhome/campervan. Within the next few years my girlfriend and I want to make a big roadtrip through Europe and Scandinavia, and then eventually a really big trip through North America. First step: get that license!</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2024/one-week-with-tesla/" title="newer article">My one week with a Tesla</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2023/django-sessions-pre-delete/" title="older article">Deleting anonymous users&apos; baskets when their sessions expire</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

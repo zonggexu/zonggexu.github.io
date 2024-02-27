@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Researching front end tools, part 3: Angular &amp; Webpack vs Browserify
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2015/research-front-end-part-3/" rel="canonical"/>
+		<meta content="Since early 2014 I’ve been working on a pretty big and complex Angular app called Sling and sadly it’s not using any module system and it’s still using ES5 only. It uses Gulp to bundle and minify all the JavaScript, compile and minify our Less files,..." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2015-06-14-research-front-end-part-3.png" name="twitter:image"/>
+		<meta content="Researching front end tools, part 3: Angular & Webpack vs Browserify" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2015/research-front-end-part-3/" name="og:url"/>
+		<meta content="Researching front end tools, part 3: Angular & Webpack vs Browserify" name="og:title"/>
+		<meta content="Since early 2014 I’ve been working on a pretty big and complex Angular app called Sling and sadly it’s not using any module system and it’s still using ES5 only. It uses Gulp to bundle and minify all the JavaScript, compile and minify our Less files,..." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2015-06-14-research-front-end-part-3.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Researching front end tools, part 3: Angular &amp; Webpack vs Browserify
+				</h1>
+				<div class="article_info">
+					<span class="time">June 14,
+						<a href="/articles/2015/">2015</a></span>1209 words, posted in <a href="/articles/tag/javascript/">javascript</a>
+				</div>
+				<div class="article_content">
+					<p>Since early 2014 I’ve been working on a pretty big and complex Angular app called <a href="http://getsling.com" target="_blank" rel="nofollow">Sling</a> and sadly it’s not using any module system and it’s still using ES5 only. It uses Gulp to bundle and minify all the JavaScript, compile and minify our Less files, add Angular injection annotations to our code, start a webserver with live reloading functionality, watches the source for changes and so on. It actually works really well but after doing the <a href="/articles/2015/research-front-end-part-1/">previous</a> <a href="/articles/2015/research-front-end-part-2/">two</a> experiments that use modules, ES6 and webpack I got a little bit tired of looking at this old fashioned project 😀.</p> 
+<p>So, for my third experiment I wanted to combine Angular with Webpack, mainly to see if this is something we can use for our project at work.</p> 
+<h3><a name="angular"></a>Angular</h3> 
+<p>I already have about one and a half years of experience with developing a big single page app in Angular so this experiment wasn’t about looking into Angular itself. It was more about how it works together with modules, ES6 and Webpack. In case you have no idea what Angular is: it’s a big framework that offers almost everything you need out of the box. Big features are its dependancy injection and extending the HTML language with new tags and attributes via directives. It’s kind of the opposite of React and Deku in a way, where the JavaScript generates the HTML: with Angular the HTML drives the JavaScript. To me that always felt as a very nice and natural way of doing things, and I still like Angular a lot.</p> 
+<p>On the other hand, it’s pretty damn big and if you’re not careful you can run into some pretty big performance problems. But of course this is possible in any framework and really in Sling we never ran into problems that we couldn’t solve.</p> 
+<p>The biggest problem with Angular for me is that version 2 is coming soon(ish) and won’t offer an easy migration. These front end experiments are all about “what would I use if I had to start a brand new project”, and I simply wouldn’t use Angular 1.x because it’s basically end-of-life. But like I said, this experiment wasn’t about finding that out.</p> 
+<h3><a name="webpack"></a>Webpack</h3> 
+<p>Just as I concluded in my <a href="/articles/2015/research-front-end-part-1/">first experiment</a>, Webpack is a bit of a blessing and a curse. Very cool features but that config.. it’s good that there are some good examples to copy from because I would never be able to come to this config just by using their documentation. It still feels like a magic black box to me, although at least I understand the loaders, how they work and what they allow me to do (like importing CSS and HTML templates).</p> 
+<p>The big question is if I would switch Sling to use Webpack. The config is done, it works, so why not? On the other hand it would be great to have a build system that the entire team would understand. With that in mind I immediately dived into my fourth experiment: replacing Webpack with Browserify.</p> 
+<p>The code for this version can be found in my <a href="https://github.com/kevinrenskers/js-skeleton/tree/angularjs-webpack" target="_blank" rel="nofollow">angularjs-webpack branch</a>.</p> 
+<h3><a name="browserify"></a>Browserify</h3> 
+<p>Because of the complexity of the Webpack config I really wanted to replace it with Browserify and see what that would be like. You view find the result in the <a href="https://github.com/kevinrenskers/js-skeleton/tree/angularjs-browserify" target="_blank" rel="nofollow">angularjs-browserify branch</a>. I can only describe this process as yak shaving or falling down the rabbit hole.</p> 
+<ol> 
+ <li>I started with using NPM scripts simply executing Browserify: take an input file, write it somewhere else.</li> 
+ <li>Rebuilds were very slow though, so then I looked into Watchify. This works a lot better, so now I had 2 run scripts, one for building a bundle for production and one that kept watching for changes.</li> 
+ <li>Using a CSS transform for Browserify worked fine so I could import CSS and have it rebuild on changes (via Watchify) too. However, I could not figure out how to extract the CSS into its own external stylesheet, so I decided to no longer import the CSS file in my JS controllers, but instead simply use Less and have that build a single external CSS file.</li> 
+ <li>Less doesn’t a have watch mode so I had to use more packages and another NPM script to watch for changes, build the CSS, and in production minify as well.</li> 
+ <li>Then I started thinking about auto reloading the browser on file changes as well as how to create the JS and CSS bundles with unique filenames (with a hash or package.json version or something to bust the browser cache) and it all became a bit too much to figure out. All of this stuff that simply worked with my Webpack config were now all separate pieces that had to work together and I couldn’t figure out how to get it working (at least not within one weekend) so I gave up on the idea of not using Gulp.</li> 
+</ol> 
+<p>So, now I’ve introduced Gulp to the mix. Watching JS and Less, using Browserify and Watchify, starting a web server that reloads the browser on changes, building production bundles with unique hashed names.. I got it all working! But instead of a 144 line Webpack config file and 22 packages (including Angular, ESLint, Bootstrap etc) I now have a <a href="https://github.com/kevinrenskers/js-skeleton/blob/angularjs-browserify/gulpfile.js" target="_blank" rel="nofollow">141 line gulpfile</a> and 36 packages. And I’m still not requiring CSS from my JavaScript code.</p> 
+<p>And is this gulpfile easier to understand for my team than the Webpack config? I seriously doubt it. We’re depending on more packages, so that means more chance of things to go wrong in the future as well.</p> 
+<h2><a name="conclusions"></a>Conclusions</h2> 
+<p>As far as Angular 1.x is concerned I already knew that it wasn’t a contender in my “find my next library or framework” search. I still like it a lot, but I think switching to Angular 2 or something completely different simply makes a lot more sense.</p> 
+<p>That brings us to Webpack versus Browserify. Of course it’s only a very simple project that I was testing with, I don’t really know how Webpack’ll hold up as soon as you introduce non-CommonJS dependancies (from Bower) for example, whereas I know that Browserify has a debowerify transform. Note to self: I should really look into this!</p> 
+<p>But for me I really like that Webpack, once configured, works beautifully with less dependancies and offering more features to boot. I think it’s where the community is moving to as well, with good reason. I just wish their documentation was better so I would feel safer about introducing this to the rest of the team. I’m definiltey going to introduce it though, I think everyone will get pretty excited about using proper modules and ES6 (and won’t even care if it’s powered by Webpack or Browserify and Gulp anyway 😀)!</p> 
+<h2><a name="up-next"></a>Up next</h2> 
+<p>I really want to look into unit testing. If I stick with Webpack, which seems very likely, how does that work with testing? And I should also look into using Bower packages, since there is a TON of good stuff not on NPM, especially for the Angular ecosystem.</p> 
+<p>Stay tuned!</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2016/front-end-stack-one-year-later/" title="newer article">Our front end stack one year later</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2015/research-front-end-part-2/" title="older article">Researching front end tools, part 2: Deku, page.js and cssnext</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

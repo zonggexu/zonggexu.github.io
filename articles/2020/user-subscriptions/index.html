@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: User subscriptions on the web
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2020/user-subscriptions/" rel="canonical"/>
+		<meta content="As I am reaching feature-completeness of my side project Critical Notes, I need to add paid subscriptions to it. Users can already subscribe in the iOS app, but of course not everyone uses iOS, so I need to build something for the web client too." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2020-06-20-user-subscriptions.png" name="twitter:image"/>
+		<meta content="User subscriptions on the web" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2020/user-subscriptions/" name="og:url"/>
+		<meta content="User subscriptions on the web" name="og:title"/>
+		<meta content="As I am reaching feature-completeness of my side project Critical Notes, I need to add paid subscriptions to it. Users can already subscribe in the iOS app, but of course not everyone uses iOS, so I need to build something for the web client too." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2020-06-20-user-subscriptions.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					User subscriptions on the web
+				</h1>
+				<div class="article_info">
+					<span class="time">June 20,
+						<a href="/articles/2020/">2020</a></span>1616 words, posted in <a href="/articles/tag/review/">review</a>
+				</div>
+				<div class="article_content">
+					<p>As I am reaching feature-completeness of my side project Critical Notes, I need to add paid subscriptions to it. Users can <a href="/articles/2020/storekit-webhooks-firestore/">already subscribe in the iOS app</a>, but of course not everyone uses iOS, so I need to build something for the web client too.</p> 
+<p>What I need and want from a payment platform is rather simple:</p> 
+<ul> 
+ <li>I want a pre-built hosted checkout page: I don’t want to have the payment form on my actual website.</li> 
+ <li>A hosted page where users can manage their subscription (cancel or update their payment method). Again, I don’t want to have to build the pages and forms to do all that.</li> 
+ <li>It needs to handle sending invoices to the user.</li> 
+ <li>It needs to keep my server up-to-date via webhook messages.</li> 
+ <li>And finally, it needs to handle VAT rates around the world. It is required by law that I collect VAT from users in the EU.</li> 
+</ul> 
+<p>Basically, I just want my server to receive an <code>isSubscribed</code> boolean for a user, and everything else is handled off-site.</p> 
+<p>These are the payment platforms/providers I’ve looked into.</p> 
+<h2><a name="stripe"></a>Stripe</h2> 
+<p>My initial impression wasn’t very positive, as their docs are an absolute maze. They have about a million pages on their documentation portal, and they all assume a fair bit of knowledge of Stripe and payment providers in general. It’s all rather low-level. But, I dug in, got some help from their support staff (via email and Twitter), and built a working implementation.</p> 
+<h3><a name="positives"></a>Positives</h3> 
+<ul> 
+ <li>Reasonable prices. They charge 1.4% to 2.9%, plus a flat fee of €0.25 per transaction.</li> 
+ <li>A hosted checkout page. You redirect to their checkout page and when the payment is completed, it redirects back to a success page on your own website.</li> 
+ <li>A hosted “customer portal” where the user can manage their subscription.</li> 
+ <li>Emails are sent with the invoice, reminders about upcoming invoices, reminders about their payment method expiring, and more.</li> 
+ <li>A solid API and webhooks (once you get it implemented, no thanks to the docs).</li> 
+ <li>A really good test mode, where you flip a switch on your Stripe Dashboard, and all payments and API calls are going to a test environment. Great to test the whole checkout flow on your own website.</li> 
+ <li>Very friendly and patient support staff.</li> 
+</ul> 
+<h3><a name="negatives"></a>Negatives</h3> 
+<ul> 
+ <li>You are required to give them your phone number, which is then displayed in all emails sent to your users. I don’t want my personal cellphone number to be public like that! But apparently it’s a legal requirement, or so that say at least.</li> 
+ <li>They don’t handle VAT at all. If you charge $4 a month for a subscription, the user will be charged $4 a month and that’s it.</li> 
+</ul> 
+<p>Of course I’m required to actually collect (and then pay to the tax office!) the value added taxes, so that last point is actually a major problem and a dealbreaker. Stripe is working on adding VAT support but the first version of it, coming in July 2020, will require you to input all countries / U.S. states and their tax levels by hand. That’s just not going to work. Plus they won’t do automatic user location detection, so the user has to pick their country to see the correct VAT percentage.</p> 
+<p>The second version of their VAT system, possibly coming in September, will instead handle VAT automatically without you needing to input this all by hand, or the user having to choose anything. I really don’t know who would use the first version.</p> 
+<p>Since I don’t want to wait until September (at the earliest), Stripe is not really an option, which is too bad as I have it all working.</p> 
+<h2><a name="gumroad"></a>Gumroad</h2> 
+<p>Gumroad is mostly targeted towards “digital creators” selling ebooks, webinars, video courses and merchandise. However they also support selling memberships and are much more “developer friendly” than Stripe. It’s not as low-level, there are way fewer things you need to do. They only support hosted checkout pages for example, which can be shown as a modal overlay on your webpage, or embedded into your page.</p> 
+<h3><a name="positives"></a>Positives</h3> 
+<ul> 
+ <li>You basically add a <code>&lt;button&gt;</code> to your website, and it opens the checkout page in a good looking overlay. Super easy.</li> 
+ <li>They have a page where users can manage all their subscriptions, including yours. It’s clearly linked in all emails too.</li> 
+ <li>They handle VAT automatically. So if you set a $4 a month price and the user is in France, they will be charged $4 + 20% VAT. Super easy for the user and for me.</li> 
+ <li>My own personal phone number is not in the emails (since technically Gumroad is the seller on record, not me).</li> 
+</ul> 
+<h3><a name="negatives"></a>Negatives</h3> 
+<ul> 
+ <li>More expensive than lower-level Stripe: 5%, plus a charge fee of 3.5% + 30¢.</li> 
+ <li>They don’t have an easy way to test the checkout flow. You can only initiate a test payment from their dashboard, but there is no “test mode” switch you can flip and test the flow from within your website. The only way to do it is to create a voucher code for 100% discount, but you end up polluting the live data with test customers. They really need a better test mode.</li> 
+ <li>The docs are way too simplistic.</li> 
+ <li>The payload you receive in the webhook is rather basic, and even using the API you don’t get an end date for a subscription for example.</li> 
+ <li>No redirect url support after a payment is complete.</li> 
+</ul> 
+<p>The lack of support for redirecting to a thank you page is actually a pretty big problem. Imagine this scenario: you have a “Subscribe now” button somewhere on your website, and when the user clicks on it, the Gumroad checkout page is shown as an overlay. The user completes their payment, and they are still left on the same page on your website with that overlay still open. So the user closes the overlay… and sees the same “Subscribe now” button. This happens because the webhook wasn’t called yet (that takes about 10 seconds), so our server doesn’t know yet that the user is now a subscriber. This is extremely confusing to the user - it takes a good 10 seconds or so for the UI to update, finally replacing the “Subscribe now” button with a “Thank you for subscribing” text.</p> 
+<blockquote> 
+ <p>Gumroad actually offers <code>redirect_url</code> support for selling digital goods, but not for memberships. They told me it’s on their roadmap but they don’t have an ETA yet.</p> 
+</blockquote> 
+<h2><a name="patreon"></a>Patreon</h2> 
+<p>It didn’t occur to me for a long time, but Patreon can actually be used for handling user subscriptions pretty easily via a “Authenticate with Patreon” button on your website. That will allow you to link your own user model to the Patreon user, call the Patreon API and get server-to-server updates via a webhook.</p> 
+<h3><a name="positives"></a>Positives</h3> 
+<ul> 
+ <li>All the subscription stuff is simply handled on Patreon.</li> 
+ <li>They automatically handle all VAT stuff as expected, same as Gumroad.</li> 
+</ul> 
+<h3><a name="negatives"></a>Negatives</h3> 
+<ul> 
+ <li>More expensive than Stripe: 5% plus payment processing fees.</li> 
+ <li>The API is dead. Their developer docs have a big red banner on top saying “As of June 22nd, 2020, we are no longer actively supporting the API due to resource constraints”, even though as recently as November 2019 <a href="https://www.patreoncommunity.com/t/the-api-has-been-abandoned/5894/4" target="_blank" rel="nofollow">they pledged something very different</a> on their community forum.</li> 
+</ul> 
+<p>Patreon seemed like a really good option, but I am not going to jump on board of an abandoned train. I really don’t understand why they would let their API die. If it was a solid API that just keeps on working I might consider using them anyway (even if it’s not supported), but just read the forums for all the problems that people are having with the API being down or broken and having to beg for weeks for help. Nope nope nope.</p> 
+<h2><a name="memberstack"></a>Memberstack</h2> 
+<p>Someone from Memberstack told me to check out their offerings. They offer “user accounts, members-only content and Stripe payments for any website” with hosted checkout pages and all that. But, it really is an all-or-nothing package deal where you have to use their user system. That’s not an option for me.</p> 
+<h2><a name="conclusion"></a>Conclusion</h2> 
+<p>So, what am I going to do now? That’s hard to say. I think Gumroad right now has the most potential: it doesn’t add my phone number to the emails, and (much more importantly) they automatically handle VAT. Sure, it’s more expensive than Stripe, but still much less than what Apple charges for In App Purchases - the famous 30%. It’s the UX that really suffers though, those 10 seconds or so where the user is looking at my webpage and not seeing that subscription being active.</p> 
+<p>Stripe meanwhile has the lowest rates and because you’re actually the seller on record, your own business name will be shown on credit card statements (rather than Gumroad or Patreon). Not important, but pretty cool. Too bad that comes with the requirement of adding your phone number to all emails. Getting a Google Voice number could work, but that’s not free and I don’t really want to take on costs until I have some subscribers. But that’s besides the point really, the real issue is the total lack of VAT support on their hosted checkout page. They really do focus on the low level stuff where YOU build a checkout page and handle VAT. It’s what Gumroad, Patreon and Memberstack are all built on.</p> 
+<p>If you have suggestions for Saas as in “subscriptions as a service”, please <a href="mailto:kevin@loopwerk.io">let me know</a>!</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2020/swiftui-review/" title="newer article">A review of SwiftUI problems</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2020/wwdc20-wishlist/" title="older article">WWDC20 wishlist</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

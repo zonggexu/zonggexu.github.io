@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Review roundup: iOS debug tools and inspectors
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2013/review-ios-debuggers/" rel="canonical"/>
+		<meta content="All of a sudden it seems there’s a big effort to create debugging tools for iOS developers. Some are free, they all have different features… Time for a comparison. 
+PonyDebugger 
+“Remote network and data debugging for your native iOS app using Chrome..." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2013-06-04-review-ios-debuggers.png" name="twitter:image"/>
+		<meta content="Review roundup: iOS debug tools and inspectors" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2013/review-ios-debuggers/" name="og:url"/>
+		<meta content="Review roundup: iOS debug tools and inspectors" name="og:title"/>
+		<meta content="All of a sudden it seems there’s a big effort to create debugging tools for iOS developers. Some are free, they all have different features… Time for a comparison. 
+PonyDebugger 
+“Remote network and data debugging for your native iOS app using Chrome..." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2013-06-04-review-ios-debuggers.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Review roundup: iOS debug tools and inspectors
+				</h1>
+				<div class="article_info">
+					<span class="time">June 04,
+						<a href="/articles/2013/">2013</a></span>825 words, posted in <a href="/articles/tag/ios/">iOS</a> and <a href="/articles/tag/review/">review</a>
+				</div>
+				<div class="article_content">
+					<p>All of a sudden it seems there’s a big effort to create debugging tools for iOS developers. Some are free, they all have different features… Time for a comparison.</p> 
+<h2><a name="ponydebugger"></a>PonyDebugger</h2> 
+<p>“Remote network and data debugging for your native iOS app using Chrome Developer Tools.” Free on the <a href="https://github.com/square/PonyDebugger" target="_blank" rel="nofollow">PonyDebugger repository</a>.</p> 
+<p><img src="/articles/images/ponydebugger.png" alt="Network traffic in Chrome Developer Tools"></p> 
+<h3><a name="features"></a>Features</h3> 
+<ul> 
+ <li>Debug network traffic</li> 
+ <li>Core Data browser</li> 
+ <li>View hierarchy debugging</li> 
+ <li>Remote logging</li> 
+</ul> 
+<h3><a name="installation-and-usage"></a>Installation and usage</h3> 
+<p>The iOS framework and its dependencies can be installed via Cocoapods, just add <code>pod 'PonyDebugger'</code>. You will also need to install the gateway server (one command in your terminal) and then start it via <code>ponyd serve --listen-interface=127.0.0.1</code>.</p> 
+<p>Now that the gateway server is listening, it’s time to connect. You first need to add a bunch of code to your app delegate:</p> 
+<pre><code class="language-objc">PDDebugger *debugger = [PDDebugger defaultInstance];
+[debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+[debugger enableNetworkTrafficDebugging];
+[debugger forwardAllNetworkTraffic];
+[debugger enableCoreDataDebugging];
+[debugger addManagedObjectContext:self.managedObjectContext withName:@"My MOC"];
+[debugger enableViewHierarchyDebugging];
+[debugger enableRemoteLogging];</code></pre> 
+<p>When you then start the app on your device or on the simulator, point Chrome to <a href="http://localhost:9000/" target="_blank" rel="nofollow">http://localhost:9000/</a> and you can use the inspector to debug your app.</p> 
+<h3><a name="verdict"></a>Verdict</h3> 
+<p>I’m not a big fan of adding all that code to my app delegate, but once that’s done it’s very easy to use PonyDebugger. I do like that it’s using Chrome as the debugger, as its network inspector is very good. This then is also the best feature of PonyDebugger: the network inspector. That said, the <a href="http://www.charlesproxy.com" target="_blank" rel="nofollow">Charles Web Debugging Proxy</a> is less hassle to setup, especially when using the simulator.</p> 
+<p>I found the view hierarchy inspector to be useful at times, but not at all user friendly to use. The Core Data browser is quite nice, while I question the usefulness of the remote logging feature.</p> 
+<p>Since PonyDebugger is free, I would recommend it, especially for the network traffic debugger.</p> 
+<h2><a name="spark-inspector"></a>Spark Inspector</h2> 
+<p>“Monitor your app and experiment in a way you never thought possible.” About $30 on <a href="http://sparkinspector.com" target="_blank" rel="nofollow">sparkinspector.com</a>.</p> 
+<p><img src="/articles/images/spark.jpg" alt="Spark 3d visualization"></p> 
+<h3><a name="features"></a>Features</h3> 
+<ul> 
+ <li>View hierarchy debugging via a 3d view of your interface</li> 
+ <li>Change view properties at runtime</li> 
+ <li>NSNotification monitor</li> 
+</ul> 
+<h3><a name="installation-and-usage"></a>Installation and usage</h3> 
+<p>Once again the iOS framework can be installed via Cocoapods, scoring points already. Just add <code>pod 'SparkInspector'</code>. You will also need to download their client app. Once you’ve started their client, you can start your app on your device or in the simulator and it works. No need to add any code at all.</p> 
+<h3><a name="verdict"></a>Verdict</h3> 
+<p>If you need to debug your view hierarchy there’s no question that Spark’s 3d interface is a million times more useful and user friendly than the PonyDebugger solution. The ability to change view properties and see the results in real time is the real winner, it’s very very easy to quickly try out different sizes, content modes, background colors, etc.</p> 
+<p>Being able to monitor all notifications (and even resend them) is very handy as well, but not something I would use all that often.</p> 
+<p>No idea why they didn’t include a network monitor though, as that is what needs most debugging, at least in my apps.</p> 
+<p>All in all a very good, easy to integrate solution when you need to do a lot of UIView debugging or need to monitor notifications. The price is fair, just wish they added network monitoring as well.</p> 
+<h2><a name="reveal-app"></a>Reveal App</h2> 
+<p>“Reveal brings the power of tools like Firebug and Web Inspector to iOS developers. See your application’s view hierarchy at runtime with advanced 2D and 3D visualizations. Debug view layout and rendering problems in seconds.” Free beta, available from <a href="http://revealapp.com" target="_blank" rel="nofollow">revealapp.com</a>.</p> 
+<p><img src="/articles/images/reveal.jpg" alt="Reveal 3d visualization"></p> 
+<h3><a name="features"></a>Features</h3> 
+<ul> 
+ <li>View hierarchy debugging via a 3d view of your interface</li> 
+ <li>Change view properties at runtime</li> 
+</ul> 
+<h3><a name="installation-and-usage"></a>Installation and usage</h3> 
+<p>You download their client application, which also includes the framework you need to add to your iOS app. Simply drag the framework into your project, run your app and you’re connected to Reveal - no code changes necessary. You can also install the framework via Cocoapods: <code>pod 'Reveal-iOS-SDK'</code>.</p> 
+<h3><a name="verdict"></a>Verdict</h3> 
+<p>Reveal basically took Spark’s 3d view inspector and added a bunch more properties that can be edited (like accessibility related properties) and other that can be viewed but not edited (like CALayer properties). I don’t like their UI as much as Spark, but the added properties are incredibly useful: testing the VoiceOver feature is a lot easier now.</p> 
+<p>One minor problem I had with Reveal was that it doesn’t automatically update the inspector like Spark does: when I switch views in my app, the inspector should be able to automatically update as well. It’s not a deal breaker though.</p> 
+<p>If you don’t need Spark’s notification monitor and can live with the uncertainty of using a “free beta” product (no idea what’s it going to cost later on), then I would recommend Reveal over Spark.</p> 
+<p>Once again though, I just wished they added a network traffic monitor.</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2013/finding-solution-pictures-cloud/" title="newer article">Searching for a solution to back up all my pictures to the cloud</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2013/getting-started-with-programming/" title="older article">Getting started with programming</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

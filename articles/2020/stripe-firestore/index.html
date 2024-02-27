@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Connecting Stripe to Firestore via Cloud Functions and webhooks
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2020/stripe-firestore/" rel="canonical"/>
+		<meta content="After adding subscriptions in iOS via Apple’s Storekit, I have now also added subscriptions to the web client of Critical Notes, using Stripe (even though they have some serious drawbacks at the moment). 
+Since it was a bit of a puzzle to get it..." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2020-06-26-stripe-firestore.png" name="twitter:image"/>
+		<meta content="Connecting Stripe to Firestore via Cloud Functions and webhooks" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2020/stripe-firestore/" name="og:url"/>
+		<meta content="Connecting Stripe to Firestore via Cloud Functions and webhooks" name="og:title"/>
+		<meta content="After adding subscriptions in iOS via Apple’s Storekit, I have now also added subscriptions to the web client of Critical Notes, using Stripe (even though they have some serious drawbacks at the moment). 
+Since it was a bit of a puzzle to get it..." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2020-06-26-stripe-firestore.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Connecting Stripe to Firestore via Cloud Functions and webhooks
+				</h1>
+				<div class="article_info">
+					<span class="time">June 26,
+						<a href="/articles/2020/">2020</a></span>946 words, posted in <a href="/articles/tag/firebase/">firebase</a> and <a href="/articles/tag/javascript/">javascript</a>
+				</div>
+				<div class="article_content">
+					<p>After adding <a href="/articles/2020/storekit-webhooks-firestore/">subscriptions in iOS via Apple’s Storekit</a>, I have now also added subscriptions to the web client of Critical Notes, using Stripe (even though they have <a href="/articles/2020/user-subscriptions/">some serious drawbacks</a> at the moment).</p> 
+<p>Since it was a bit of a puzzle to get it working, I am sharing my backend and frontend code.</p> 
+<h2><a name="opening-the-checkout-page"></a>Opening the Checkout page</h2> 
+<p>It all starts with a button that the user can click to subscribe.</p> 
+<pre><code>&lt;button on:click={() =&gt; subscibe('price_A')}&gt;$3.99/month&lt;/button&gt;</code></pre> 
+<p>That calls the <code>subscibe</code> function below:</p> 
+<pre><code class="language-javascript">function subscibe(priceId) {
+  createStripeSession(priceId).then(result =&gt; {
+    const sessionId = result.data;
+
+    const stripe = Stripe("pk_live_XXX");
+    stripe.redirectToCheckout({
+      sessionId: sessionId,
+    }).then(function (result) {
+      console.log(result.error.message);
+    });
+  });
+}
+
+import "firebase/functions";
+
+function createStripeSession(priceId) {
+  return functions.httpsCallable("createStripeSession")({priceId: priceId})
+    .catch(error =&gt; {
+      showError(error.message);
+    });
+}</code></pre> 
+<p>As you can see, <code>subscibe</code> calls <code>createStripeSession</code>, which in turn executes a callable Cloud Function called <code>createStripeSession</code> to fetch a Stripe session id. Once it has that session id, it can redirect to Stripe’s hosted Checkout page.</p> 
+<p>The Cloud Function is a bit more complex.</p> 
+<pre><code class="language-javascript">const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+const db = admin.firestore();
+const stripe = require("stripe")("sk_live_XXXXXX");
+
+const runtimeOpts = {
+  memory: "1GB",
+};
+
+exports.createStripeSession = functions.runWith(runtimeOpts).https.onCall(async (data, context) =&gt; {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("permission-denied", "The function must be called while authenticated.");
+  }
+
+  if (!data.priceId) {
+    throw new functions.https.HttpsError("permission-denied", "priceId is required");
+  }
+
+  const userId = context.auth.uid;
+
+  const userSnapshot = await db.collection("users").doc(userId).get();
+  if (!userSnapshot.exists) {
+    throw new functions.https.HttpsError("not-found", "No user document found.");
+  }
+
+  const user = userSnapshot.data();
+
+  let customerId;
+
+  if (user.webSubscription &amp;&amp; user.webSubscription.customer) {
+    customerId = user.webSubscription.customer;
+  } else {
+    const customer = await stripe.customers.create({
+      description: userId,
+      name: user.name,
+      email: context.auth.token.email,
+    });
+
+    customerId = customer.id;
+    await userSnapshot.ref.update({ webSubscription: { customer: customerId } });
+  }
+
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items: [
+      {
+        price: data.priceId,
+        quantity: 1,
+      },
+    ],
+    mode: "subscription",
+    success_url: "https://www.critical-notes.com/subscriptions/success",
+    cancel_url: "https://www.critical-notes.com/subscriptions/cancelled",
+    customer: customerId,
+  });
+
+  return session.id;
+});</code></pre> 
+<p>Let’s go over it. First of all, we try to fetch the user document from Firestore, for the user that is calling this Cloud Function. We check if the user already has a stored Stripe subscription, if so, that means we can use the existing Stripe customer object. Otherwise we create a Stripe customer and store its id on our user object.</p> 
+<p>Finally we create a session object using that customer id and return the session id.</p> 
+<p>With all that code done, the user is able to view the Checkout page and pay to subscribe.</p> 
+<h2><a name="webhook"></a>Webhook</h2> 
+<p>The other part of the puzzle is the webhook that enables Stripe to send server-to-server updates whenever a subscription is created, renewed, cancelled, etc. That’s another Cloud Function.</p> 
+<pre><code class="language-javascript">exports.stripeWebhook = functions.runWith(runtimeOpts).https.onRequest(async (request, response) =&gt; {
+  const endpointSecret = "whsec_XXXXX";
+  const sig = request.get("stripe-signature");
+
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(request.rawBody, sig, endpointSecret);
+  } catch (err) {
+    return response.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  if (event.type === "checkout.session.completed") {
+    const subscription = await stripe.subscriptions.retrieve(event.data.object.subscription);
+    await updateSubscription(subscription);
+  }
+
+  if (event.type === "customer.subscription.created") {
+    updateSubscription(event.data.object);
+  }
+
+  if (event.type === "customer.subscription.updated") {
+    updateSubscription(event.data.object);
+  }
+
+  if (event.type === "customer.subscription.deleted") {
+    updateSubscription(event.data.object);
+  }
+
+  response.json({ received: true });
+});
+
+async function updateSubscription(subscription) {
+  // Find the user with this stored customerId
+  const userQuerySnapshot = await db.collection("users").where("webSubscription.customer", "==", subscription.customer).limit(1).get();
+
+  if (userQuerySnapshot.empty) {
+    throw new functions.https.HttpsError("not-found", "No user found");
+  }
+
+  const expireDate = subscription.ended_at ? 0 : subscription.current_period_end * 1000; // in ms
+  const isSubscribed = expireDate &gt; Date.now();
+
+  const status = {
+    isSubscribed: isSubscribed,
+    expireDate: expireDate,
+  };
+
+  const webSubscription = subscription;
+
+  return userQuerySnapshot.docs[0].ref.update({ status: status, webSubscription: webSubscription });
+}</code></pre> 
+<p>We get different kinds of events from Stripe, and we handle them in slightly different ways, but in the end we always store Stripe’s subscription object on the user, together with a simple <code>isSubscribed</code> boolean in a <code>status</code> object.</p> 
+<h2><a name="enable-the-user-to-manage-their-subscription"></a>Enable the user to manage their subscription</h2> 
+<p>Finally, we want the user to be able to manage their subscription: cancel it, renew it, update their payment method, and so on. Luckily Stripe offers a handy Customer Portal for this, so we don’t have to build this ourselves.</p> 
+<p>It works in a similar way as opening the Checkout page. We again start with a button:</p> 
+<pre><code>&lt;button on:click={openPortal}&gt;Manage subscription&lt;/button&gt;</code></pre> 
+<p>That calls this JavaScript function:</p> 
+<pre><code class="language-javascript">function getStripePortalUrl() {
+  return functions.httpsCallable("getStripePortalUrl")()
+    .catch(error =&gt; {
+      showError(error.message);
+    });
+}</code></pre> 
+<p>Which uses yet another Cloud Function:</p> 
+<pre><code class="language-javascript">exports.getStripePortalUrl = functions.runWith(runtimeOpts).https.onCall(async (data, context) =&gt; {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("permission-denied", "The function must be called while authenticated.");
+  }
+
+  const userId = context.auth.uid;
+
+  const userSnapshot = await db.collection("users").doc(userId).get();
+  if (!userSnapshot.exists) {
+    throw new functions.https.HttpsError("not-found", "No user document found.");
+  }
+
+  const user = userSnapshot.data();
+
+  const result = await stripe.billingPortal.sessions.create({
+    customer: user.webSubscription.customer,
+    return_url: "https://www.critical-notes.com",
+  });
+
+  return result.url;
+});</code></pre> 
+<p>And there you have it! A complete implementation of Stripe for handling user subscriptions.</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2020/book-review-practical-combine/" title="newer article">Book review: Practical Combine</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2020/wwdc-review/" title="older article">WWDC20 review</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

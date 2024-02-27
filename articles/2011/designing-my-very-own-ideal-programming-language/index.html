@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Designing my very own ideal programming language
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2011/designing-my-very-own-ideal-programming-language/" rel="canonical"/>
+		<meta content="In 2009 I made the switch to Python, after having worked exclusively with PHP and Javascript for almost a decade. I really like the language, much more than I ever liked PHP. Of course it’s not perfect (see one of my first posts called Things I hate..." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2011-04-24-designing-my-very-own-ideal-programming-language.png" name="twitter:image"/>
+		<meta content="Designing my very own ideal programming language" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2011/designing-my-very-own-ideal-programming-language/" name="og:url"/>
+		<meta content="Designing my very own ideal programming language" name="og:title"/>
+		<meta content="In 2009 I made the switch to Python, after having worked exclusively with PHP and Javascript for almost a decade. I really like the language, much more than I ever liked PHP. Of course it’s not perfect (see one of my first posts called Things I hate..." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2011-04-24-designing-my-very-own-ideal-programming-language.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Designing my very own ideal programming language
+				</h1>
+				<div class="article_info">
+					<span class="time">April 24,
+						<a href="/articles/2011/">2011</a></span>1655 words, posted in <a href="/articles/tag/random/">random</a>
+				</div>
+				<div class="article_content">
+					<p>In 2009 I made the switch to Python, after having worked exclusively with PHP and Javascript for almost a decade. I really like the language, much more than I ever liked PHP. Of course it’s not perfect (see one of my first posts called <a href="/articles/2009/things-i-hate-about-python-and-django/">Things I hate about Python and Django</a>), but I never really thought much about the lesser parts of the language.</p> 
+<p>Until I started to learn other languages as well, that is.</p> 
+<p>In May of 2010 I learned Objective-C, to create iPhone- and iPad apps. I like the fact that everything is very strict: you always know precisely what types of arguments a methods expects, and what the return value will be. I spend a lot less time looking at source code or documentation; Xcode’s autocompletion will tell me in detail how I should call a function and what I’ll get back. Then again, writing separate header- and implementation files is not on my list of things I like to day all day long.</p> 
+<p>A few week ago I bought a book on Ruby. Mainly because it looked like a very nice language, but also in great part because of MacRuby and its Cocoa bindings. My suspicion was correct: Ruby is a very nice language. In fact, in many ways it looks much friendlier and more logical than Python. Of course also this language has its quirks, things that would bother me.</p> 
+<p>I then began to wonder what my ideal language would look like, if I could design my own. One part Ruby, one part Python, sprinkle with the best parts of Objective-C, and finish with the outstanding documentation of PHP. It would probably have the following characteristics:</p> 
+<ul> 
+ <li>There should be one —and preferably only one— obvious way to do it</li> 
+ <li>Everything is an object</li> 
+ <li>Significant whitespace but with curly braces: easy to see where a function or block ends, but will enforce correct indentation (i.e. will not run when code inside a block is not indented correctly)</li> 
+ <li><a href="http://en.wikipedia.org/wiki/Type_system#Static_typing" target="_blank" rel="nofollow">Static</a>, <a href="http://en.wikipedia.org/wiki/Strong_typing" target="_blank" rel="nofollow">Strong</a> and <a href="http://en.wikipedia.org/wiki/Duck_typing" target="_blank" rel="nofollow">Duck</a> typing</li> 
+ <li>Add methods to existing classes (even internal ones) like in Ruby or Objective-C’s categories.</li> 
+ <li>Unicode everywhere</li> 
+ <li>Function names and variables may end with punctuation codes ? and !. The question marks makes it clear it’s a function that returns a Bool. The exclamation mark indicates the function should be used with care, for example because it modifies a variable in place (instead of returning a modified copy).</li> 
+ <li>Very few global functions, prefer methods on internal classes</li> 
+ <li>Keyword arguments</li> 
+ <li>Visibility: public, protected, private</li> 
+ <li>Blocks like in Ruby or Objective-C</li> 
+ <li>Multiple inheritance</li> 
+ <li>Decorators</li> 
+ <li>Only one way to add comments: the # sign. Multi-line comment syntax like <code>/* */</code> is ugly.</li> 
+ <li>Global variables <a href="http://stackoverflow.com/questions/423379/global-variables-in-python" target="_blank" rel="nofollow">like in Python</a></li> 
+ <li>Python’s <code>from ... import ...</code> and <code>import ...</code>, giving you great control over namespaces</li> 
+ <li>But not the <code>__init__.py</code> files!</li> 
+ <li>Enforced case convention, no more mixed styles from different programmers working on the same project: 
+  <ul> 
+   <li>CONSTANTS</li> 
+   <li>ClassNames</li> 
+   <li>variable_names</li> 
+   <li>function_names()</li> 
+  </ul> </li> 
+</ul> 
+<p>Let’s start with some basic hypothetical code examples.</p> 
+<h2><a name="strings"></a>Strings</h2> 
+<pre><code class="language-text"># variable_type variable_name = statement
+String greeting = 'Hello, world'
+String another_string = String.new('Also a string')
+print greeting # 'Hello, world'
+greeting.class # String
+greeting.length # length is a property, not a function
+
+# Single quoted strings are "raw" strings. Double quoted string can
+# contain special escape sequences. Single quoted string are a
+# little bit more efficient if you don't need those sequences.
+print "hello\tworld" # 'hello	world'
+print 'hello\tworld' # 'hello\tworld'
+
+# String interpolating is not supported, since this often leads to
+# unreadable strings. Use string formatting instead:
+print 'Hello, %s'.format('World')
+print 'Name: %(name)s, age: %(id)d'.format(name='Kevin', age=29)</code></pre> 
+<h2><a name="numbers"></a>Numbers</h2> 
+<pre><code class="language-text">Int one = 1
+Float third = 0.3
+print one # 1
+String one_string = one.to_s()
+print one_string # '1'</code></pre> 
+<h2><a name="lists-and-ranges"></a>Lists and ranges</h2> 
+<pre><code class="language-text">List my_list = ['a', 1, another_object]
+my_list.length
+print my_list[0]
+
+List my_range = [1..3]
+# this includes the end number, so the same as [1, 2, 3]
+
+# You can create a list with an infinite length.
+# This can be used in place of the while(True) syntax
+# seen in other languages (see also Enumeration, below)
+List my_infinite range = [0..]
+
+# Since all lists are (yield) generators, this infinite
+# list doesn't use infinite memory.</code></pre> 
+<h2><a name="hashes"></a>Hashes</h2> 
+<pre><code class="language-text">Hash my_hash = {'food':'apple', 'color':'green', 'price':12}
+print my_hash['food']
+
+key = 'color'
+print my_hash[key]</code></pre> 
+<h2><a name="functions"></a>Functions</h2> 
+<pre><code class="language-text"># (return_type) function_name(arguments) { code }
+(Int) make_sum(Int x, Int y) {
+    return x + y
+}
+
+Int the_sum = make_sum(x=123, y=456)
+
+# Order of arguments doesn't matter, as long as all
+# the required arguments are given.
+# Note: Void is the same as Null or None in other languages.
+(Void) print_line(String name='world', String greeting) {
+    print '%s, %s!'.format(greeting, name)
+}
+
+print_line(greeting='Hello') # print "Hello, world!"
+
+# If a function has no arguments, you can't leave
+# out the parenthesis (like you can in Ruby)
+a_function()
+
+# Lastly, if a function doesn't specifically return
+# something, it doesn't. Unlike Ruby, where the
+# last statement is returned.</code></pre> 
+<h2><a name="decorators"></a>Decorators</h2> 
+<pre><code class="language-text">@login_required()
+(String) get_username() {
+    return self.user.username
+}</code></pre> 
+<h2><a name="flow-control"></a>Flow control</h2> 
+<pre><code class="language-text"># Empty string, list, hash and zero are all False.
+if variable == True {
+    # do stuff
+} else {
+    # something else
+}
+
+# Triple equation marks checks if it's the same type as well as value
+if 1234 === True {
+    # this will never be reached since an int is not a boolean
+}
+
+variable.switch() {
+    case 'one' {
+        # the value of variable equals 'one'
+    }
+
+    case 'two' {
+        # the value of variable equals 'two'
+    }
+
+    default {
+        # the value of variable is neither 'one' or 'two'
+    }
+}</code></pre> 
+<h2><a name="classes"></a>Classes</h2> 
+<pre><code class="language-text">class MyClass(Superclass) {
+    String my_variable
+
+    (MyClass) new(String variable) {
+        # This is the default constructor or initializer.
+        # If we subclass/override it, we should call the super class:
+        self = super.new()
+
+        # Do custom initializing, set instance variables, etc
+        self.my_variable = variable
+
+        # new() should always return self
+        return self
+    }
+
+    (String) to_s() {
+        return '&lt;MyClass %s&gt;'.format(self.my_variable)
+    }
+}
+
+# Extend existing classes by reopening them. After we do this,
+# all strings will know how to greet.
+class String {
+    (Void) protected greet() {
+        print 'Hello, %s'.format(self)
+    }
+}
+
+# Overwrite a function in an existing class. Great if you use third
+# party software that is perfect except for that one function...
+class User {
+    (Bool) authenticated?() {
+        # The way you want it to work...
+    }
+}</code></pre> 
+<h2><a name="symbols"></a>Symbols</h2> 
+<pre><code class="language-text"># Symbols are immutable, super lightweight strings. They are created
+# with backticks.
+Symbol sym = `this is a symbol`
+
+# You can use this when you're only interested in the value of a string
+# and don't need any of the String methods. A good use is for selectors
+# like this:
+object.responds_to?(`do_stuff`)
+
+# You only care about the value of the string, you don't need to trim it,
+# make it uppercase, count the letters, etc.
+# This also works, but creating an instance of a String and passing
+# it around is overkill:
+my_list.responds_to?('do_stuff')
+
+# Basically, the only thing they know is how is print themselves
+print `oh lala`
+
+`oh lala`.upper() # fail! need to convert to a string first
+`oh lala`.to_s().upper()
+
+# Since symbols save memory, they are recommended when you'd use a
+# string only as identifier:
+Hash my_better_hash = {`food`:'apple', `color`:'green', `price`:12}
+print my_better_hash[`food`]</code></pre> 
+<p>Note to self: not really sure about this syntax. Especially in the hash example the mixed use of backticks and single quotes is ugly and confusing. Still better than Ruby’s :symbol syntax though, again especially when combined with hashes.</p> 
+<h2><a name="blocks"></a>Blocks</h2> 
+<pre><code class="language-text"># Blocks are anonymous (nameless) functions. Formal syntax:
+# (return type) block_name = ^(arguments) { code }
+
+(Int) my_block = ^(Int number) {
+    return number * 7
+}
+
+print "%d".format(my_block(3))
+
+# Of course, this was not much different from creating a normal
+# function. Comparison:
+# (Int) my_function(Int number) {
+# 	return number * 7
+# }
+
+# The real power of blocks is from using them directly as function
+# arguments:
+
+my_array.custom_sort(^(Object first_item, Object second_item) {
+    return first_item &lt; second_items
+})
+
+# A block with no arguments drops the parenthesis: ^{}
+3.times(^{print 'hooray!'})</code></pre> 
+<h2><a name="enumeration"></a>Enumeration</h2> 
+<pre><code class="language-text"># Enumeration is done with blocks.
+
+[1..3].each(^(Int i) {
+    print i
+}
+
+# Break out of a loop by returning
+[0..].each(^(Int i) {
+    print i
+
+    if i == 3 {
+        return
+    }
+}
+# prints 0, 1, 2 and 3, then exists the loop
+
+my_list.each(^(Object item) {
+    print item
+}
+
+my_hash.each(^(String k, Object v) {
+    print '%(key)s = %(value)s'.format(key=k, value=v)
+}</code></pre> 
+<p>As you can see, most of the syntax is a blend of Ruby and Python, but with static typing and curly braces. Of course this is not a complete description of a language, but the general feel and syntax should be clear.</p> 
+<h1><a name="why-not-just-use"></a>Why not just use…</h1> 
+<p>…Ruby?</p> 
+<ul> 
+ <li>I don’t like the <code>do</code> / <code>end</code> block syntax with the vertical bars</li> 
+ <li>Multiple ways to do stuff. I like my language explicit, not implicit.</li> 
+ <li>Whitespace is not significant, correct indentation is not enforced</li> 
+ <li>No multiple inheritance, no decorators</li> 
+ <li><code>@instance_variable</code> and <code>@@class_variable</code>. I think <code>self.instance_variable</code> is much cleaner.</li> 
+ <li><code>$global_variable</code></li> 
+ <li>Parenthesis and return statement are not required but implied. Again: I like explicit much better.</li> 
+ <li>The <code>=&gt;</code> syntax for hashes</li> 
+</ul> 
+<p>…or Python?</p> 
+<ul> 
+ <li>All those annoying underscores in function names</li> 
+ <li>The <code>__init__.py</code> files. It’s just ugly!</li> 
+ <li>Not everything is an object, too many global functions (i.e. <code>len(list)</code> instead of <code>list.len()</code>)</li> 
+ <li>Ugly syntax bits like the lambda functions and the call to a superclass function: <code>super(MyClass, self).__init__(*args, **kwargs))</code></li> 
+ <li>Dictionaries are unsorted</li> 
+ <li><code>self</code> as the first argument of each and every method</li> 
+ <li>No <code>switch</code> statement</li> 
+ <li>No visibility (public, protected, private)</li> 
+ <li>No easy way to extend existing classes, or overwrite functions in them</li> 
+ <li><code>' '.join(list)</code> instead of <code>list.join(' ')</code> - it’s just backwards!</li> 
+</ul>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2011/playing-around-static-site-generators/" title="newer article">Playing around with static site generators</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2011/search-perfect-python-ide-django/" title="older article">Review roundup: the search for the perfect Python IDE (for Django)</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

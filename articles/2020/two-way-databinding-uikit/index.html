@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Exploring two-way databinding solutions in UIKit
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2020/two-way-databinding-uikit/" rel="canonical"/>
+		<meta content="With SwiftUI we have the @Binding property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it's slightly less easy. Let's explore some solutions." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2020-07-10-two-way-databinding-uikit.png" name="twitter:image"/>
+		<meta content="Exploring two-way databinding solutions in UIKit" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2020/two-way-databinding-uikit/" name="og:url"/>
+		<meta content="Exploring two-way databinding solutions in UIKit" name="og:title"/>
+		<meta content="With SwiftUI we have the @Binding property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it's slightly less easy. Let's explore some solutions." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2020-07-10-two-way-databinding-uikit.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Exploring two-way databinding solutions in UIKit
+				</h1>
+				<div class="article_info">
+					<span class="time">July 10,
+						<a href="/articles/2020/">2020</a></span>1142 words, posted in <a href="/articles/tag/combine/">combine</a>, <a href="/articles/tag/ios/">iOS</a> and <a href="/articles/tag/swift/">swift</a>
+				</div>
+				<div class="article_content">
+					<p>It’s quite common to have to build some kind of (reusable) component to edit some piece of state. For example, let’s say we have a <code>User</code> model, and we want to build a form to edit a user. With SwiftUI we have the <code>@Binding</code> property wrapper that makes it really easy to create a two-way databinding between a form field and a model, but in the UIKit world it’s slightly less easy.</p> 
+<p>You can image that we’d build a <code>UITableView</code> with a <code>UITableViewCell</code> for every field of the user that we want to edit. Every cell has a <code>UITextField</code>, which is instantiated with the current value of the field we want to edit. And when the value is changed, we of course want to update the field on the user model.</p> 
+<p>Let’s start off with a version without two-way databinding to set a baseline. Simplified, it can look something like this:</p> 
+<pre><code class="language-swift">import UIKit
+
+struct User {
+  var firstName: String
+  var lastName: String
+}
+
+class TextFieldCell {
+  let textField = UITextField()
+
+  init(value: String) {
+    textField.text = value
+  }
+}
+
+class MyViewController {
+  var user = User(firstName: "Kevin", lastName: "Renskers")
+  var nameTextField: TextFieldCell
+
+  init() {
+    nameTextField = TextFieldCell(value: user.firstName)
+  }
+}</code></pre> 
+<p>We create a <code>TextFieldCell</code> for the user’s <code>firstName</code> field and instantiate it with the current value of the first name (“Kevin”). There is no databinding going on at all; if you’d edit the text inside the <code>UITextField</code>, nothing happens to the actual user model, its name is forever stuck to be “Kevin”.</p> 
+<p>We need to introduce a way to communicate changes back to the model. A simple way is to use a closure:</p> 
+<pre><code class="language-swift">class TextFieldCell {
+  let textField = UITextField()
+  private let onUpdate: (String) -&gt; Void
+
+  init(initialValue: String, onUpdate: @escaping (String) -&gt; Void) {
+    self.onUpdate = onUpdate
+    textField.text = initialValue
+    textField.addTarget(self, action: #selector(updated), for: .valueChanged)
+  }
+
+  @objc func updated() {
+    onUpdate(textField.text ?? "")
+  }
+}
+
+class MyViewController {
+  var user = User(firstName: "Kevin", lastName: "Renskers")
+  var nameTextField: TextFieldCell!
+
+  init() {
+    nameTextField = TextFieldCell(initialValue: user.firstName) { newName in
+      self.user.firstName = newName
+    }
+  }
+}
+
+let vc = MyViewController()
+print(vc.user.firstName) // prints "Kevin"
+
+vc.nameTextField?.textField.text = "Bob"
+vc.nameTextField?.updated()
+
+print(vc.user.firstName) // prints "Bob" 🎉</code></pre> 
+<p><em>I’m calling the <code>updated</code> function by hand in the second to last line since programmatically changing the text value of a <code>UITextField</code> doesn’t trigger the <code>valueChanged</code> action.</em></p> 
+<p>We start off with a user called “Kevin”, update the value to “Bob”, and the user’s <code>firstName</code> property now holds “Bob”. It feels a bit iffy to have to pass in the <code>user.firstName</code> and also do the <code>user.firstName = newName</code> dance - it would be much nicer if this could be combined into one.</p> 
+<p>One improvement that we can make is to use KeyPaths.</p> 
+<pre><code class="language-swift">class TextFieldCell&lt;Model&gt; {
+  let textField = UITextField()
+  private let model: Model
+  private let keyPath: ReferenceWritableKeyPath&lt;Model, String&gt;
+
+  init(model: Model, keyPath: ReferenceWritableKeyPath&lt;Model, String&gt;) {
+    self.model = model
+    self.keyPath = keyPath
+    textField.text = model[keyPath: keyPath]
+    textField.addTarget(self, action: #selector(updated), for: .valueChanged)
+  }
+
+  @objc func updated() {
+    model[keyPath: keyPath] = textField.text ?? ""
+  }
+}
+
+class MyViewController {
+  var user = User(firstName: "Kevin", lastName: "Renskers")
+  var nameTextField: TextFieldCell&lt;MyViewController&gt;!
+
+  init() {
+    nameTextField = TextFieldCell(model: self, keyPath: \.user.firstName)
+  }
+}</code></pre> 
+<p>Creating an instance of <code>TextFieldCell</code> is now a lot simpler, as you don’t have to give an initial value and also an <code>onUpdate</code> closure. Instead we give a <code>ReferenceWritableKeyPath</code>.</p> 
+<p>However, it can be slightly disorienting to work with this, due to the usage of <code>ReferenceWritableKeyPath</code>. For example since the <code>User</code> model is a struct (a value type), I need to pass in the view controller itself as the model, with the keyPath <code>\.user.firstName</code>.</p> 
+<p>Can we use SwiftUI’s <code>Binding</code> inside UIKit? Yes we can, provided that we are building an iOS 13+ app of course.</p> 
+<pre><code class="language-swift">class TextFieldCell {
+  let textField = UITextField()
+  private let value: Binding&lt;String&gt;
+
+  init(value: Binding&lt;String&gt;) {
+    self.value = value
+    textField.text = value.wrappedValue
+    textField.addTarget(self, action: #selector(updated), for: .valueChanged)
+  }
+
+  @objc func updated() {
+    value.wrappedValue = textField.text ?? ""
+  }
+}
+
+class MyViewController {
+  var user = User(firstName: "Kevin", lastName: "Renskers")
+  var nameTextField: TextFieldCell!
+
+  init() {
+    nameTextField = TextFieldCell(value: 
+      Binding(
+        get: { self.user.firstName }, 
+        set: { self.user.firstName = $0 }
+      )
+    )
+  }
+}</code></pre> 
+<p>It solves the <code>ReferenceWritableKeyPath</code> weirdness, but now we’re back to needing to give both a getter and a setter, so it’s not an ideal solution either. It can be improved by also using <code>@State</code>, but at the cost of turning the <code>User</code> model into a class:</p> 
+<pre><code class="language-swift">class User {
+  var firstName: String
+  var lastName: String
+
+  init(firstName: String, lastName: String) {
+    self.firstName = firstName
+    self.lastName = lastName
+  }
+}
+
+class TextFieldCell {
+  let textField = UITextField()
+  private let value: Binding&lt;String&gt;
+
+  init(value: Binding&lt;String&gt;) {
+    self.value = value
+    textField.text = value.wrappedValue
+    textField.addTarget(self, action: #selector(updated), for: .valueChanged)
+  }
+
+  @objc func updated() {
+    value.wrappedValue = textField.text ?? ""
+  }
+}
+
+class MyViewController {
+  @State var user = User(firstName: "Kevin", lastName: "Renskers")
+  var nameTextField: TextFieldCell!
+
+  init() {
+    nameTextField = TextFieldCell(value: $user.firstName)
+  }
+}</code></pre> 
+<p>How about we use Combine, with a <code>PassthroughSubject</code>, instead?</p> 
+<pre><code class="language-swift">class TextFieldCell {
+  let textField = UITextField()
+  private let subject: PassthroughSubject&lt;String, Never&gt;
+  private var cancellable: AnyCancellable?
+
+  init(subject: PassthroughSubject&lt;String, Never&gt;) {
+    self.subject = subject
+    textField.addTarget(self, action: #selector(updated), for: .valueChanged)
+
+    cancellable = subject.sink {
+      self.textField.text = $0
+    }
+  }
+
+  @objc func updated() {
+    subject.send(textField.text ?? "")
+  }
+}
+
+class MyViewController {
+  var user = User(firstName: "Kevin", lastName: "Renskers")
+  var nameTextField: TextFieldCell!
+  private var cancellable: AnyCancellable?
+
+  init() {
+    let subject = PassthroughSubject&lt;String, Never&gt;()
+    subject.send(user.firstName)
+    cancellable = subject.assign(to: \.user.firstName, on: self)
+    nameTextField = TextFieldCell(subject: subject)
+  }
+}</code></pre> 
+<p>It works, but at the cost of even more boilerplate. Definitely not an improvement!</p> 
+<p>And using <code>@Published</code> gets us back to needing to both initialize and then observe a value:</p> 
+<pre><code class="language-swift">class TextFieldCell {
+  let textField = UITextField()
+  @Published var value = ""
+
+  init() {
+    textField.addTarget(self, action: #selector(updated), for: .valueChanged)
+  }
+
+  @objc func updated() {
+    value = textField.text ?? ""
+  }
+}
+
+class MyViewController {
+  var user = User(firstName: "Kevin", lastName: "Renskers")
+  var nameTextField: TextFieldCell!
+  private var cancellable: AnyCancellable?
+
+  init() {
+    nameTextField = TextFieldCell()
+
+    nameTextField.value = user.firstName
+
+    cancellable = nameTextField.$value.sink { [weak self] value in
+      self?.user.firstName = value
+    }
+  }
+}</code></pre> 
+<p>So honestly at that point you might as well just use the closure method.</p> 
+<p>At the moment my solution of choice is the <code>ReferenceWritableKeyPath</code> when I have a class as the model (or a class ViewModel for example that holds a value type model). If that is not possible and it’s an iOS 13+ app, then the <code>Binding</code> approach would work pretty well too. But it feels like there is no really nice ideal solution with the same ease of use as SwiftUI.</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2020/book-review-thinking-in-swiftui/" title="newer article">Book review: Thinking in SwiftUI</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2020/book-review-practical-combine/" title="older article">Book review: Practical Combine</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

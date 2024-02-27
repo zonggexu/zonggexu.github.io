@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: WWDC20 wishlist
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2020/wwdc20-wishlist/" rel="canonical"/>
+		<meta content="WWDC is just around the corner, and we're all waiting like little kids at Christmas to see what Apple is going to announce. Most of us also are hoping for specific changes, here are my top wishes." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2020-06-18-wwdc20-wishlist.png" name="twitter:image"/>
+		<meta content="WWDC20 wishlist" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2020/wwdc20-wishlist/" name="og:url"/>
+		<meta content="WWDC20 wishlist" name="og:title"/>
+		<meta content="WWDC is just around the corner, and we're all waiting like little kids at Christmas to see what Apple is going to announce. Most of us also are hoping for specific changes, here are my top wishes." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2020-06-18-wwdc20-wishlist.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					WWDC20 wishlist
+				</h1>
+				<div class="article_info">
+					<span class="time">June 18,
+						<a href="/articles/2020/">2020</a></span>799 words, posted in <a href="/articles/tag/ios/">iOS</a>
+				</div>
+				<div class="article_content">
+					<p>WWDC is just around the corner, and we’re all waiting like little kids at Christmas to see what Apple is going to announce. Most of us also are hoping for specific changes, here are my top wishes.</p> 
+<h2><a name="swiftui-2-0"></a>SwiftUI 2.0</h2> 
+<p>I love SwiftUI! Well, mostly. While it’s super quick and easy to build complex and good looking interfaces, it’s also quite buggy, needs a ton of workarounds, and is missing a lot of features. I’ll have more to say on all of this in <a href="/articles/2020/swiftui-review/">an upcoming article</a>.</p> 
+<p>Of all my wishes for this year’s WWDC, a new version of SwiftUI is by far the biggest one.</p> 
+<p>Likelihood: 100%. Of course this is coming.</p> 
+<h2><a name="combine-2-0"></a>Combine 2.0</h2> 
+<p>Combine is pretty awesome. I never really liked RxSwift a lot, but have been in love with ReactiveKit for about a year now. But in my iOS 13+ apps I am now exclusively using Combine (even with UIKit app where I am not using SwiftUI). Yes the need to type-erase everything is kind of annoying, but overall it’s a really really good v1.</p> 
+<p>What I am missing are nicer bindings to the UI. Something like ReactiveKit’s <a href="https://github.com/DeclarativeHub/Bond" target="_blank" rel="nofollow">Bond</a>, RxSwift’s <a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="nofollow">RxCocoa</a> or ReactiveSwift’s <a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="nofollow">ReactiveCocoa</a>. There are the open source libraries <a href="https://github.com/CombineCommunity/CombineCocoa" target="_blank" rel="nofollow">CombineCocoa</a> and <a href="https://github.com/CombineCommunity/CombineDataSources" target="_blank" rel="nofollow">CombineDataSources</a> which helps, but I would prefer first-party support from Apple. I wouldn’t mind Apple including most of the stuff from <a href="https://github.com/CombineCommunity/CombineExt" target="_blank" rel="nofollow">CombineExt</a> either.</p> 
+<p>Likelihood: 50%. I think this will come at some point, but maybe not this year.</p> 
+<h2><a name="custom-watch-faces"></a>Custom Watch faces</h2> 
+<p>Apple Watch was introduced five years ago, and we still don’t have custom watch faces. It wasn’t until iPhoneOS 4.0 that we had background images on the iPhone, but WatchOS 7 is coming up now and it’s about time we have a store for new watch faces.</p> 
+<p>Likelihood: 25%. Apple just doesn’t seem that interested in making the most personal Apple device even more personal and customizable. If they add it, it’s probably only for the latest generation of the Watch.</p> 
+<h2><a name="testflight-for-macos"></a>TestFlight for macOS</h2> 
+<p>With the arrival of Catalyst (the “magic checkbox” to turn an iOS app into an macOS app) there are going to be more and more iOS apps ported over to the Mac, and it’s currently simply a pain to distribute test builds. We need TestFlight for the Mac.</p> 
+<p>Likelihood: 75%. I think Apple know this needs to happen, and I think it should be rather easy for them to make this happen.</p> 
+<h2><a name="improved-catalyst"></a>Improved Catalyst</h2> 
+<p>Speaking of Catalyst, the results of that magic checkbox certainly have room for improvement. Catalyst apps by default look way too much like misplaced iOS apps on the Mac, with a lot of developer time and effort needed to turn them into proper macOS apps. Even Apple is struggling with for example the Developer app. Still, it seems to me that Catalyst is a stop-gap solution until SwiftUI is mature enough and the majority of all apps for all their platforms will be written with SwiftUI.</p> 
+<p>Likelihood: 95%. I definitely think we’ll see at least some improvements to the default output, with probably new APIs to make it easier to customize the resulting app without having to reach for AppKit.</p> 
+<h2><a name="apple-hosted-ci-cd-a-k-a-bring-back-buddybuild"></a>Apple-hosted CI/CD (a.k.a. bring back BuddyBuild!)</h2> 
+<p>I loved BuddyBuild, it was by far the best CI/CD platform out there for iOS apps, with superb crash reporting and build signing. Apple bought them in 2018, and since then it’s impossible to sign up for a new account. Sadly my old account belonged to an old employer so I don’t have access to it anymore, and I really do miss BuddyBuild.</p> 
+<p>Likelihood: 10%. I think Apple will use (or is already using) BuddyBuild tech into their existing stack, but I don’t think it’s super likely that we’ll get an Apple-branded CI/CD platform any time soon.</p> 
+<h2><a name="upgrade-pricing-for-ios-apps"></a>Upgrade pricing for iOS apps</h2> 
+<p>We need it. Enough said.</p> 
+<p>Likelihood: 0%. 😢</p> 
+<h2><a name="lower-apple-cut-for-in-app-purchases"></a>Lower Apple cut for In App Purchases</h2> 
+<p>The 30% Apple tax is insanely high. They just don’t provide enough to justify this amount, especially considering that you also have to pay $99 a year to be in the developer program to begin with.</p> 
+<p>Likelihood: 1%. Not quite 0% due to all the investigations around the world into Apple’s anti-competitive behavior, but yeah, I don’t see this happening.</p> 
+<h2><a name="xcode-on-ipad"></a>Xcode on iPad</h2> 
+<p>Okay, not the whole thing, but I want to at least work on SwiftUI apps on the iPad, with live previews.</p> 
+<p>Likelihood: 5%. Hopefully in the future.</p> 
+<h2><a name="other-bits-and-pieces"></a>Other bits and pieces</h2> 
+<ul> 
+ <li>Change default apps</li> 
+ <li>Fix iPad multitasking</li> 
+ <li>Bring back the old “magnifying glass” cursor control to iOS</li> 
+ <li>Apple Watch sleep tracking</li> 
+</ul>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2020/user-subscriptions/" title="newer article">User subscriptions on the web</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2020/storekit-webhooks-firestore/" title="older article">Connecting Storekit to Firestore via Cloud Functions and webhooks</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

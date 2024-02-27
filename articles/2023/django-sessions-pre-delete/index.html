@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Deleting anonymous users&apos; baskets when their sessions expire
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2023/django-sessions-pre-delete/" rel="canonical"/>
+		<meta content="How do you delete baskets belonging to anonymous users when their sessions expires? It wasn't quite as simple as I thought." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2023-10-25-django-sessions-pre-delete.png" name="twitter:image"/>
+		<meta content="Deleting anonymous users' baskets when their sessions expire" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2023/django-sessions-pre-delete/" name="og:url"/>
+		<meta content="Deleting anonymous users' baskets when their sessions expire" name="og:title"/>
+		<meta content="How do you delete baskets belonging to anonymous users when their sessions expires? It wasn't quite as simple as I thought." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2023-10-25-django-sessions-pre-delete.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Deleting anonymous users&apos; baskets when their sessions expire
+				</h1>
+				<div class="article_info">
+					<span class="time">October 25,
+						<a href="/articles/2023/">2023</a></span>858 words, posted in <a href="/articles/tag/django/">django</a> and <a href="/articles/tag/python/">python</a>
+				</div>
+				<div class="article_content">
+					<p>I’m in the process of migrating <a href="https://www.soundradix.com" target="_blank" rel="nofollow">a webshop</a> from Django-Oscar to a custom shop, built from scratch. We want anonymous (not logged in) users to be able to add products to their basket, but we also want baskets to be cleaned up when that anonymous user’s session expires. Plus, when an anonymous user logs in, their anonymous basket should then be assigned to that user, possibly by merging it with an existing open basket for the user.</p> 
+<p>The biggest problem I had was the cleaning up of baskets when sessions expire. With Oscar we have literally over 31 million open baskets for anonymous users in our database, 99.9% of which are of course unable to ever be checked out because those sessions are long expired - and deleted, by running the <code>clearsessions</code> management command. This is something that I really wanted to do better with our new shop.</p> 
+<p>My first instinct was to model the basket like this:</p> 
+<pre><code class="language-python">class Basket(Model):
+    owner = ForeignKey(User, blank=True, null=True, on_delete=CASCADE)
+    session = ForeignKey(Session, blank=True, null=True, on_delete=CASCADE)</code></pre> 
+<p>The basket would either belong to a user, or be assigned a session. When the session is removed from the database, the basket would automatically be deleted with it. And when the user logs in I’d simply assign the basket to the user and remove the session value. That was the idea at least.</p> 
+<p>Sadly it wasn’t quite this easy. The problem is that when a user logs in, that this user gets a new session (which is documented <a href="https://docs.djangoproject.com/en/4.2/topics/http/sessions/#django.contrib.sessions.backends.base.SessionBase.cycle_key" target="_blank" rel="nofollow">right here</a>). And the old session is deleted, so the basket is also deleted, before you ever get a chance to assign the basket to the newly logged-in user, for example in a <code>user_logged_in</code> signal handler.</p> 
+<p>I could override the built-in <code>cycle_key</code> method to simply not do its thing. When a user logs in they keep their old session and in the <code>user_logged_in</code> signal handler I can update the basket. It’s a simple solution, but one that leaves our users vulnerable to <a href="https://en.wikipedia.org/wiki/Session_fixation" target="_blank" rel="nofollow">session fixation attacks</a>, so really it’s not a solution at all. What other options do we have?</p> 
+<p>In the end I removed the <code>session</code> field from my <code>Basket</code> model, and I am storing the basket ID inside of the session. Then I have a <code>pre_delete</code> signal handler reacting when sessions are deleted, and in this handler I then clean up the basket.</p> 
+<p>Let’s look at the code. The code to get the basket for the current request is rather simple:</p> 
+<pre><code class="language-python">def get_basket(request):
+    if request.user and request.user.is_authenticated:
+        return Basket.objects.get_or_create(owner=request.user, status=Basket.Status.OPEN)[0]
+    else:
+        basket_id = request.session.get("basket_id", None)
+        if basket_id:
+            try:
+                return Basket.objects.get(id=basket_id, owner__isnull=True, status=Basket.Status.OPEN)
+            except Basket.DoesNotExist:
+                pass
+
+        basket = Basket.objects.create(owner=None, status=Basket.Status.OPEN)
+        request.session["basket_id"] = basket.id
+        return basket</code></pre> 
+<p>If the user is logged in we get (or create) a basket for the user. Otherwise we see if there’s a <code>basket_id</code> value in the session and get that basket - or create a new basket for the anonymous user and store its ID in the session.</p> 
+<p>Of course I want baskets to be removed when sessions expires, which is what the following signal handler does:</p> 
+<pre><code class="language-python">@receiver(pre_delete, sender=Session)
+def session_deleted(instance, **kwargs):
+    if instance.expire_date &lt; timezone.now():
+        # Session is getting deleted because it expired.
+        # Delete the anonymous basket belonging to this session (if any).
+        basket_id = instance.get_decoded().get("basket_id", None)
+        if basket_id:
+            Basket.objects.filter(id=basket_id, owner__isnull=True).delete()</code></pre> 
+<p>And finally, the <code>user_logged_in</code> signal handler that assigns the anonymous basket to the now logged-in user:</p> 
+<pre><code class="language-python">@receiver(user_logged_in)
+def logged_in(request, user, **kwargs):
+    basket_id = request.session.get("basket_id", None)
+    if basket_id:
+        assign_or_merge_basket(basket_id=basket_id, user=user)
+        del request.session["basket_id"]
+
+def assign_or_merge_basket(basket_id, user):
+    try:
+        from_basket = Basket.objects.get(id=basket_id, owner__isnull=True, status=Basket.Status.OPEN)
+    except Basket.DoesNotExist:
+        # If we can't find the basket, then there's nothing to do, nothing to migrate or merge.
+        return
+
+    # Does this user already have an open basket? If so, then merge the contents of this basket
+    # with that basket. Otherwise just assign the owner to the basket.
+    try:
+        into_basket = Basket.objects.get(owner=user, status=Basket.Status.OPEN)
+        merge_baskets(from_basket, into_basket)
+    except Basket.DoesNotExist:
+        Basket.objects.filter(id=basket_id, owner__isnull=True).update(owner=user)</code></pre> 
+<p>And with all these pieces in place we have baskets for anonymous users that are getting cleaned up when sessions expire.</p> 
+<p>One thing to note is that this only works with the database backend for sessions. If you use the cache backend then there’s no <code>pre_delete</code> signal for when a session is removed. This is unfortunate and something I wish Django would improve, to make it possible to clean up database records tied to sessions.</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2023/2023-in-review/" title="newer article">2023 in review</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2023/adding-custom-actions-django-admin/" title="older article">Adding custom actions to the Django Admin</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

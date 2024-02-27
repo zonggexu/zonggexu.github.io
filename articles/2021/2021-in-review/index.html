@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: 2021 in review
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2021/2021-in-review/" rel="canonical"/>
+		<meta content="Welcome to the end of 2021, a.k.a. the second year of the pandemic. Another year of not going abroad, barely seeing friends, playing Dungeons & Dragons via Zoom instead of at the table. A year of mild depression and feelings of loneliness. But also a year of hope when we all got access to the vaccines and when we didn't hear about Trump every day in the news. And last but not least: it was also a very productive year!" name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2021-12-29-2021-in-review.png" name="twitter:image"/>
+		<meta content="2021 in review" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2021/2021-in-review/" name="og:url"/>
+		<meta content="2021 in review" name="og:title"/>
+		<meta content="Welcome to the end of 2021, a.k.a. the second year of the pandemic. Another year of not going abroad, barely seeing friends, playing Dungeons & Dragons via Zoom instead of at the table. A year of mild depression and feelings of loneliness. But also a year of hope when we all got access to the vaccines and when we didn't hear about Trump every day in the news. And last but not least: it was also a very productive year!" name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2021-12-29-2021-in-review.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					2021 in review
+				</h1>
+				<div class="article_info">
+					<span class="time">December 29,
+						<a href="/articles/2021/">2021</a></span>1225 words, posted in <a href="/articles/tag/random/">random</a>
+				</div>
+				<div class="article_content">
+					<p>Welcome to the end of 2021, a.k.a. the second year of the pandemic. Another year of not going abroad, barely seeing friends, playing Dungeons &amp; Dragons via Zoom instead of at the table. A year of mild depression and feelings of loneliness. But also a year of hope when we all got access to the vaccines and when we didn’t hear about Trump every day in the news. And last but not least: it was also a very productive year!</p> 
+<h2><a name="open-source-projects"></a>Open source projects</h2> 
+<p>In the first quarter of the year I created a whole bunch of open source projects: <a href="https://github.com/loopwerk/Saga" target="_blank" rel="nofollow">Saga</a>, my static site generator written in Swift; <a href="https://github.com/loopwerk/Parsley" target="_blank" rel="nofollow">Parsley</a>, a Markdown parser for Swift using Github Flavored Markdown and supporting metadata blocks; a <a href="https://github.com/topics/saga-plugin" target="_blank" rel="nofollow">whole bunch of plugins</a> for Saga; and <a href="https://github.com/loopwerk/tag-changelog" target="_blank" rel="nofollow">tag-changelog</a>, a GitHub action to automate creating changelogs based on git tags. I completely rebuilt this website to use Saga and am super happy with the result. In December I added async/await support to Saga as well, and released version 1.0.0. I also wrote a <a href="https://www.loopwerk.io/articles/tag/saga/" target="_blank" rel="nofollow">series of articles</a> talking about the API design of Saga and the road to version 1.</p> 
+<h2><a name="side-projects"></a>Side projects</h2> 
+<p>2021 was a huge year for my side project <a href="https://www.critical-notes.com" target="_blank" rel="nofollow">Critical Notes</a>, a note-taking web app for roleplaying games like Dungeons &amp; Dragons. I got my very first paid subscriber in March, and overall have earned 330 euros. Of course this is extremely little money when you consider the hundreds and hundreds of hours I spent working on this project, but it feels very good that I do have 12 paid users now (plus a few hundred free users). I’m no longer building this just for myself! It really helps to motive me to keep working on it.</p> 
+<p>This year I also completely rewrote both the frontend and the backend. I was using Svelte for the web app with Firestore as the backend, but I wasn’t happy with the performance. Especially the first time you’d open the website it took too long to render all initial content. I’m now using SvelteKit with server side rendering, and a brand new API written in Python using Django, Django REST Framework and websockets via Channels. Performance is way way better, I’m no longer dependent on Firebase, I can now properly unit test my backend, and last but not least: user privacy is a lot better now that Google/Firebase doesn’t have access to user data anymore!</p> 
+<p>It was a massive undertaking, taking hundreds of hours over almost four months, but totally worth it. I’m looking forward to adding new features to the web app, and am thinking about building a native iOS app.</p> 
+<h2><a name="freelance-work"></a>Freelance work</h2> 
+<p>I’ve worked for multiple clients this year, and most of the projects were interesting and fun to work on. Sadly I also encountered my worst client of all time this year. A big reason why I became a freelancer was to be able to choose my own clients and projects, and sometimes you just pick the wrong one. Something you thought was going to be amazing to work on turns out to be absolutely horrible. In this case I fled after just a month - the fourth iOS developer to ditch the project in just six months turns out (that should tell you something). And the client got so angry with me leaving after a month that he refused to pay me for the time that I was there. Those kinds of fights are definitely the dark side of being a freelancer, but luckily very uncommon. I’m now working as a freelancer for over five years and have only had two bad experiences so far. Knock on wood.</p> 
+<p>I should really write a separate article about life as a freelancer, since multiple of mentees have been asking about that as well. Which brings me to…</p> 
+<h2><a name="mentorship-program"></a>Mentorship program</h2> 
+<p>My resolution this year was to do some kind of volunteering work, but of course with COVID going on that wasn’t too easy. So I decided to start <a href="https://www.loopwerk.io/mentor/" target="_blank" rel="nofollow">my own mentorship program</a> where I have a few mentees, have weekly office hours, and the mentees can just book a meeting with me when they need help. This has been the best decision I made this year! I’ve had four different mentees this year; three women and one man, from all over the world. We have regular meetings via Zoom where the mentee can share their screen, and we pair program, I can review code, or we just do mock interviews to prepare for real job interviews. And I’m happy to say that three of my mentees have gotten their first iOS job this year! I’m very proud of them.</p> 
+<p>I would highly recommend any experienced developer to take on a mentee (or mentees). Not only does it give you a very good feeling to help other people, you also get a lot of experience yourself. The questions you get.. you need to get good at explaining things and that’s just a good skill to have for anyone. Especially for senior developers! And as a freelancer who works mostly by myself, I don’t get many opportunities to train and mentor junior colleagues or team mates anymore so this mentorship program was perfect for myself as well.</p> 
+<h2><a name="personal-stuff"></a>Personal stuff</h2> 
+<p>I got my motorcycle license and bought my first motorcycle! I also bought a house; early next year I’m moving back to my childhood hometown, where all my family lives. It’s going to be weird to leave my current city, I’ve lived here for 18 years after all, but I’m really looking forward to being close to my family again.</p> 
+<p>It’s not all good news: I also fell down the stairs at the end of March, nearly broke my neck, couldn’t do anything for a few weeks and had really bad muscle pains for multiple months. Even now my right thigh still hurts from time to time due to a ripped muscle. Fun times. Combined with the pandemic and not seeing any of my friends, that definitely turned into a depression that lasted a good portion of the year. Luckily I’m feeling a lot better now, the prospect of moving into my new home made a big difference.</p> 
+<h2><a name="2022-resolutions"></a>2022 resolutions</h2> 
+<p>Next year I’m going to have to find a balance between working for clients, working on open source projects, working on Critical Notes, helping my mentees… and working on my new house. Because the new house, it’s old and needs a lot of work. Like, a lot a lot. And of course that costs a lot of money, so that means I have to do more freelance work. It’s going to be tricky to find a balance where I can sort of juggle all these responsibilities.</p> 
+<p>I also really want to go on my first motorcycle roadtrip, so I have to find some time (and money) for that as well. My resolution is to not burn out and know when to take a break, even if that means having less money to fix up the house in the short term. Either way, I think it’s going to be a very busy and probably stressful year!</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2022/sveltekit-architecture/" title="newer article">SvelteKit Architecture - the solution</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2021/sveltekit-cookies-tokens/" title="older article">Working around HttpOnly cookie problems in SvelteKit</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

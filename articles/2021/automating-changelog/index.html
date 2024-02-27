@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Automating your changelog and GitHub releases
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2021/automating-changelog/" rel="canonical"/>
+		<meta content="In a short time I’ve created 25 releases for my static site generator Saga. For each release I’ve manually updated the CHANGELOG.md file, which is a bit tedious and easy to forget. I really wanted to automate this using GitHub Actions, which I was..." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2021-02-20-automating-changelog.png" name="twitter:image"/>
+		<meta content="Automating your changelog and GitHub releases" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2021/automating-changelog/" name="og:url"/>
+		<meta content="Automating your changelog and GitHub releases" name="og:title"/>
+		<meta content="In a short time I’ve created 25 releases for my static site generator Saga. For each release I’ve manually updated the CHANGELOG.md file, which is a bit tedious and easy to forget. I really wanted to automate this using GitHub Actions, which I was..." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2021-02-20-automating-changelog.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Automating your changelog and GitHub releases
+				</h1>
+				<div class="article_info">
+					<span class="time">February 20,
+						<a href="/articles/2021/">2021</a></span>1230 words, posted in <a href="/articles/tag/javascript/">javascript</a> and <a href="/articles/tag/open-source/">open source</a>
+				</div>
+				<div class="article_content">
+					<p>In a short time I’ve created 25 releases for my static site generator <a href="https://github.com/loopwerk/Saga" target="_blank" rel="nofollow">Saga</a>. For each release I’ve manually updated the <code>CHANGELOG.md</code> file, which is a bit tedious and easy to forget. I really wanted to automate this using GitHub Actions, which I was already using to automatically run unit tests on every commit to the main branch, and for every pull request. I searched the <a href="https://github.com/marketplace" target="_blank" rel="nofollow">GitHub Marketplace</a> for Actions that would suit my needs, but sadly couldn’t find any.</p> 
+<ul> 
+ <li>I create releases by pushing tags, so my workflow needs to be triggered by, and be based on, tags.</li> 
+ <li>Most of the Actions I found on the Marketplace are Pull Request and Issue based: they create a changelog based on closed Pull Requests and Issues between two points in time. This is not how the majority of my work is done: since it’s just me, at least for now, most code is simply committed to the main branch without going through a pull request. And if there’s a Pull Request, that’ll end up in a squashed commit anyway, so it’s no problem to only use commits to generate the changelog.</li> 
+ <li>I have specific wishes for how the changelog should look like. I want to use the <a href="https://www.conventionalcommits.org/" target="_blank" rel="nofollow">Conventional Commits</a> format, but also turn pull request references in commit messages into clickable links: [#8] should become [<a href="https://github.com/loopwerk/Saga/pull/8" target="_blank" rel="nofollow">#8</a>].</li> 
+</ul> 
+<p>Maybe there’s an existing Action that would be the perfect fit for me, but I also thought it would be interesting to create my own. It took a bit longer than I thought it would, mostly due to the difficulty to set up a development environment where I can run GitHub Actions locally, but the Action is done! It’s called <a href="https://github.com/loopwerk/tag-changelog" target="_blank" rel="nofollow">tag-changelog</a> can be used in your GitHub Actions workflows too.</p> 
+<p>My Action simply takes the commits between the last two tags, and turns that into a changelog string which is then made available for other Actions.</p> 
+<pre><code class="language-yml">- name: Create changelog text
+  id: changelog
+  uses: loopwerk/tag-changelog@v1
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    exclude_types: other,perf</code></pre> 
+<p>So if you want to write the generated changelog to a file, or if you want to automatically create GitHub Releases using that same changelog text, that’s all very easy. You combine small steps into a larger workflow:</p> 
+<pre><code class="language-yml">name: Create Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create changelog text
+        id: changelog
+        uses: loopwerk/tag-changelog@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exclude_types: other,perf
+
+      - name: Create release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.changelog.outputs.changes }}
+
+      - name: Read CHANGELOG.md
+        id: package
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./CHANGELOG.md
+
+      - name: Write to CHANGELOG.md
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: ./CHANGELOG.md
+          contents: ${{ steps.changelog.outputs.changelog }}${{ steps.package.outputs.content }}
+          write-mode: overwrite
+
+      - name: Commit and push CHANGELOG.md
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: CHANGELOG.md
+          message: "chore: Update CHANGELOG.md"
+          branch: main</code></pre> 
+<p>I wasn’t creating GitHub Releases yet for Saga, I simply didn’t feel like doing that extra work since I was already using git tags and keeping a <code>CHANGELOG</code> file, but now that it’s all automated; not a problem anymore.</p> 
+<p>To be fair, <code>tag-changelog</code> is rather opinionated at the moment, it’s not configurable and I’m not sure how many other people will find it useful - but give it a look if it sounds interesting. I am planning to make the Action much more configurable and would gladly accept contributions.</p> 
+<p>Which brings me to the actual development process that I’m using. Normally you’d have to commit and push every single change to GitHub to test your Action, but before I even started writing a single line of code, I already knew I didn’t want to work like that. It took a bit of effort, but I now have a workflow where I can run my Action locally on my own machine using <a href="https://github.com/nektos/act" target="_blank" rel="nofollow">act</a>. I had to figure the following things out, that I am documenting mostly for myself, but if you’re planning to write GitHub Actions, this will be very helpful too I think.</p> 
+<ol> 
+ <li> <p>Installing act is super simple using Homebrew: <code>brew install act</code>. However, you will also need to install Docker. I used <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="nofollow">Docker Desktop</a>.</p> </li> 
+ <li> <p>You’ll need to create a <code>.github/workflow/[workflow].yml</code> file within your Action repo, that will be executed by act. There are subtle differences in how act behaves different from the real GitHub workflow runner though, and this was the first big hurdle.</p> </li> 
+</ol> 
+<pre><code class="language-yml">name: My Workflow
+
+on:
+  push
+
+jobs:
+  my-workflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Locally
+        uses: actions/checkout@v2
+        if: ${{ env.ACT }}
+        with:
+          path: "[my_folder_name]"
+      - name: Checkout GitHub
+        uses: actions/checkout@v2
+        if: ${{ !env.ACT }}
+
+      - name: My Action
+        uses: ./</code></pre> 
+<p>The big gotcha is how <code>actions/checkout</code> needs to be setup differently for the local vs. remote runner. For act, it needs that <code>path</code> parameter, which should be set to the name of the folder containing your Action. My <code>tag-changelog</code> Action for example is located in <code>/Users/loopwerk/workspace/tag-changelog</code>, so I would use <code>path: "tag-changelog"</code>.</p> 
+<p>The second gotcha is that <code>uses: ./</code> parameter for the Action you’re working on. This also works when the workflow runs on GitHub itself.</p> 
+<ol start="3"> 
+ <li> <p><code>node_modules</code> is a problem when that’s in your <code>.gitignore</code> file, which is very likely. The problem is that everything in your <code>.gitignore</code> is not copied to the Docker image running the workflow, and so any dependencies you’re trying to <code>import</code>, no longer work. The solution is to package up all the JavaScript into a single compiled file containing all the dependencies. I used <a href="https://github.com/vercel/ncc" target="_blank" rel="nofollow">ncc</a> for that.</p> </li> 
+ <li> <p>If your Action depend on <code>${{ secrets.GITHUB_TOKEN }}</code>, you have some extra work to do which wasn’t clear to me: you’ll need to manually create a personal access token and store it in a <code>.secrets</code> file like this:</p> </li> 
+</ol> 
+<pre><code>GITHUB_TOKEN=ABC123ABC123ABC123ABC123ABC123</code></pre> 
+<p>If you don’t do this step, your Action will not be given a <code>GITHUB_TOKEN</code>, since act can’t create one for the runner like GitHub does. Just make really sure to add this file to <code>.gitignore</code>!</p> 
+<ol start="5"> 
+ <li>If you’re using <code>getOctokit</code> from <code>@actions/github</code>, your Action does need to be in a git repo that’s actually pushed to GitHub. This was a puzzle that I couldn’t solve for a long time: I was trying to get a first version of my Action to work locally before even committing anything, let alone pushing it to GitHub, but that simply doesn’t work. At least push a basic <code>README</code> file for example, and then work on your JavaScript code locally, and it’ll work just fine.</li> 
+</ol> 
+<p>You can look at the <a href="https://github.com/loopwerk/tag-changelog" target="_blank" rel="nofollow">repo for tag-changelog</a>, in particular check out <code>.github/workflows/run.yml</code>, <code>package.json</code> and <code>action.yml</code>. If you’re trying to build a JavaScript-based GitHub Action, that should give you all the information necessary to also use act to locally develop and test your code, while it also works when GitHub runs it online.</p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2021/faq-promise-all-combine/" title="newer article">Mentee Question 3: How to know when multiple publishers completed?</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2021/review-markdown-parsers/" title="older article">A review of Markdown parsers for Swift</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

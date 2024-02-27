@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Adding custom actions to the Django Admin
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2023/adding-custom-actions-django-admin/" rel="canonical"/>
+		<meta content="Let's add custom actions to Django's admin site - but to the change form, not the list view." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2023-07-20-adding-custom-actions-django-admin.png" name="twitter:image"/>
+		<meta content="Adding custom actions to the Django Admin" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2023/adding-custom-actions-django-admin/" name="og:url"/>
+		<meta content="Adding custom actions to the Django Admin" name="og:title"/>
+		<meta content="Let's add custom actions to Django's admin site - but to the change form, not the list view." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2023-07-20-adding-custom-actions-django-admin.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Adding custom actions to the Django Admin
+				</h1>
+				<div class="article_info">
+					<span class="time">July 20,
+						<a href="/articles/2023/">2023</a></span>867 words, posted in <a href="/articles/tag/django/">django</a> and <a href="/articles/tag/python/">python</a>
+				</div>
+				<div class="article_content">
+					<p>For <a href="https://www.soundradix.com" target="_blank" rel="nofollow">a project I am working on</a> I had to build a form where people can apply to get educational discounts on all the products in the shop. This form is sent to the Django backend, where it’s stored in the database, but these applications have to be reviewed by someone from the support team.</p> 
+<p>Here’s the list of requirements going in:</p> 
+<ul> 
+ <li>We’re going to use Django’s built-in admin interface, as the support team is already using this for all other things.</li> 
+ <li>The model should be read-only in the admin UI: the applications can be denied or approved, but it doesn’t make sense to edit them.</li> 
+ <li>Instead of the usual delete and save buttons, there should be two other buttons: deny and approve.</li> 
+ <li>When pressing either of these buttons, another page will be shown with a textarea pre-filled with some text which will be sent to the user who filled in the apply form.</li> 
+</ul> 
+<p>When looking at the Django docs I came across something called <a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/actions/" target="_blank" rel="nofollow">Admin actions</a> which sounded perfect, but sadly that’s purely for adding actions to the list-view, to execute some kind of action on one or multiple objects at the same time. That’s not what I need. I’m pretty sure I’m not the only one who ran into the same wish to add a new action (page) to the admin interface and looked at the Admin actions docs in disappointed, so here’s how I managed to fulfill my requirements in three easy steps.</p> 
+<h2><a name="1-making-the-form-read-only"></a>1. Making the form read-only</h2> 
+<p>This was really easy: just override the <code>has_change_permission</code> and <code>has_delete_permission</code> methods of your <code>ModelAdmin</code> subclass.</p> 
+<pre><code class="language-python">class EducationalDiscountApplicationAdmin(admin.ModelAdmin):
+    list_display = ["user", "type", "institute", "program", "created"]
+    list_filter = ["type", "created"]
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+admin.site.register(EducationalDiscountApplication, EducationalDiscountApplicationAdmin)</code></pre> 
+<p>Now when opening an <code>EducationalDiscountApplication</code> object in the admin, the delete and save buttons are gone, replaced with a close button. The list view now even says “Select educational discount application to view” instead of “to change”. Neat!</p> 
+<h2><a name="2-adding-the-deny-and-approve-buttons-to-the-change-form"></a>2. Adding the deny and approve buttons to the change form</h2> 
+<p>I created a new template called <code>submit_line.html</code>, in the <code>templates/admin/[app_name]/[model_name]/</code> folder, with the following code:</p> 
+<pre><code>{% extends "admin/submit_line.html" %}
+{% load i18n admin_urls %}
+{% block submit-row %}
+    &lt;a href="../deny/" class="closelink" style="background:red;"&gt;DENY&lt;/a&gt;
+    &lt;a href="../approve/" class="closelink" style="background:green;"&gt;APPROVE&lt;/a&gt;
+{% endblock %}</code></pre> 
+<p>And already when I open the change form of an <code>EducationalDiscountApplication</code> object, I can see the new buttons!</p> 
+<p><img src="/articles/images/django-admin-actions-1.png" alt="screenshot"></p> 
+<p>Clicking on them doesn’t do anything yet, as these URLs are not recognized by the admin site yet. That’s the third and final part of the puzzle.</p> 
+<h1><a name="3-adding-the-new-views-to-the-admin-site"></a>3. Adding the new views to the admin site</h1> 
+<p>Add the <code>get_urls</code> method to the <code>ModelAdmin</code> subclass:</p> 
+<pre><code class="language-python">class EducationalDiscountApplicationAdmin(admin.ModelAdmin):
+    list_display = ["user", "type", "institute", "program", "created"]
+    list_filter = ["type", "created"]
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path("&lt;int:pk&gt;/deny/", self.admin_site.admin_view(self.deny_view)),
+            path("&lt;int:pk&gt;/approve/", self.admin_site.admin_view(self.approve_view)),
+        ]
+        return my_urls + urls
+
+    def deny_view(self, request, pk):
+        application = EducationalDiscountApplication.objects.get(pk=pk)
+
+        if request.method == "POST":
+            # Do something here:
+            # Send email, delete the application form, etc
+
+            return redirect("admin:sr_app_educationaldiscountapplication_changelist")
+
+        context = dict(
+            self.admin_site.each_context(request),
+            object=application,
+            opts=EducationalDiscountApplication._meta,
+            title="Deny Application?",
+        )
+        return TemplateResponse(request, "admin/sr_app/educationaldiscountapplication/deny_application.html", context)
+        
+    def approve_view(self, request, pk):
+        # ...</code></pre> 
+<p>And the template:</p> 
+<pre><code>{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+{% block breadcrumbs %}
+&lt;div class="breadcrumbs"&gt;
+&lt;a href="{% url 'admin:index' %}"&gt;{% translate 'Home' %}&lt;/a&gt;
+&amp;rsaquo; &lt;a href="{% url 'admin:app_list' app_label=opts.app_label %}"&gt;{{ opts.app_config.verbose_name }}&lt;/a&gt;
+&amp;rsaquo; &lt;a href="{% url opts|admin_urlname:'changelist' %}"&gt;{{ opts.verbose_name_plural|capfirst }}&lt;/a&gt;
+&amp;rsaquo; &lt;a href="{% url opts|admin_urlname:'change' object.pk|admin_urlquote %}"&gt;{{ object|truncatewords:"18" }}&lt;/a&gt;
+&amp;rsaquo; {% translate 'Deny' %}
+&lt;/div&gt;
+{% endblock %}
+
+{% block content %}
+&lt;form method="post"&gt;{% csrf_token %}
+    &lt;div&gt;
+        &lt;input type="hidden" name="post" value="yes"&gt;
+        &lt;textarea style="width: 100%; height: 400px; margin-bottom: 20px;" name="text"&gt;&lt;/textarea&gt;
+        &lt;input type="submit" value="{% translate 'Deny the application and send the email' %}"&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+{% endblock %}</code></pre> 
+<p>And with this in place the new page is shown when the DENY button is pressed, and form submits can easily be handled in the view code. Best of all, the page doesn’t look out of place at all, as it’s rendered in the same way as the delete confirmation page for example, with the same sidebar, header, breadcrumbs, the whole shebang.</p> 
+<p><img src="/articles/images/django-admin-actions-2.png" alt="screenshot"></p>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2023/django-sessions-pre-delete/" title="newer article">Deleting anonymous users&apos; baskets when their sessions expire</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2023/setting-up-debian-11/" title="older article">Setting up a Debian 11 server for SvelteKit and Django</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>

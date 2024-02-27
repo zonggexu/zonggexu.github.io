@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="#0e1112" media="(prefers-color-scheme: dark)" name="theme-color"/>
+		<meta content="#FF1493" media="(prefers-color-scheme: light)" name="theme-color"/>
+		<meta content="Kevin Renskers" name="author"/>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<meta content="True" name="HandheldFriendly"/>
+		<meta content="320" name="MobileOptimized"/>
+		<meta content="Loopwerk" name="og:site_name"/>
+		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
+		<title>
+			Loopwerk: Getting started with programming
+		</title>
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/prism.css" rel="stylesheet"/>
+		<link href="/articles/feed.xml" rel="alternate" title="Loopwerk" type="application/rss+xml"/>
+		<link href="/static/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="/static/not-home.css" rel="stylesheet"/>
+		<link href="https://www.loopwerk.io/articles/2013/getting-started-with-programming/" rel="canonical"/>
+		<meta content="At least twice per year someone will ask me how he or she can get started with programming. With the economy down jobs are hard to find, but there’s always a need for developers, at least here in Iceland - so it’s no wonder that more people are..." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.loopwerk.io/static/images/2013-06-03-getting-started-with-programming.png" name="twitter:image"/>
+		<meta content="Getting started with programming" name="twitter:image:alt"/>
+		<meta content="https://www.loopwerk.io/articles/2013/getting-started-with-programming/" name="og:url"/>
+		<meta content="Getting started with programming" name="og:title"/>
+		<meta content="At least twice per year someone will ask me how he or she can get started with programming. With the economy down jobs are hard to find, but there’s always a need for developers, at least here in Iceland - so it’s no wonder that more people are..." name="og:description"/>
+		<meta content="https://www.loopwerk.io/static/images/2013-06-03-getting-started-with-programming.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
+		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<img alt="Loopwerk logo" height="30" src="/static/images/swiftImage.png" width="30"/>
+				<ul>
+					<li>
+						<a class="link_1" href="/">主页</a>
+					</li>
+					<li>
+						<a class="link_2 active" href="/articles/">文章</a>
+					</li>
+					<li>
+						<a class="link_3" href="/apps/">Apps</a>
+					</li>
+					<li>
+						<a class="link_4" href="/projects/">开源项目</a>
+					</li>
+					<li>
+						<a class="link_6" href="/about/">关于</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content">
+			<article>
+				<h1>
+					Getting started with programming
+				</h1>
+				<div class="article_info">
+					<span class="time">June 03,
+						<a href="/articles/2013/">2013</a></span>1059 words, posted in <a href="/articles/tag/faq/">faq</a>
+				</div>
+				<div class="article_content">
+					<p>At least twice per year someone will ask me how he or she can get started with programming. With the economy down jobs are hard to find, but there’s always a need for developers, at least here in Iceland - so it’s no wonder that more people are wondering how to get started.</p> 
+<p><em>Not in the mood to read all these words? Here’s my recommendation in a nutshell: begin with HTML and CSS, move on to Python and Django, and add Javascript. All available for free on <a href="http://www.codecademy.com/learn" target="_blank" rel="nofollow">codecademy.com</a>. Also check out <a href="http://teachyourselftocode.com" target="_blank" rel="nofollow">teachyourselftocode.com</a> which has a lot of useful links.</em></p> 
+<p>Here then is in story form a bunch of links to useful resources. Please keep in mind that this is my personal recommendation, other people will tell you to learn Ruby or Java, and these are also fine choices - just not mine :)</p> 
+<p>For me it all started in the year 2000 when I wanted to create my first website. I used to be more interested in the hardware side, having built my own computers before but not really doing much programming. Luckily HTML and CSS were incredibly easy to learn and my first website was online in a matter of days.</p> 
+<h2><a name="html-and-css"></a>HTML and CSS</h2> 
+<p>First things first: HTML and CSS are no programming languages. HTML is a markup language, which means that you can wrap your text in special tags so a web browser knows how to display the text. A simple example:</p> 
+<pre><code class="language-html">&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Hello World&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;h1&gt;This is the title&lt;/h1&gt;
+		&lt;p&gt;
+			This is a paragraph with a
+			&lt;a href="http://www.google.com"&gt;link to Google&lt;/a&gt;.
+		&lt;/p&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre> 
+<p>If you were to save this to a file called <code>hello.html</code> and open it in your browser, you would see a very simple webpage. As you can see, there is no programming involved, by which I mean there is no logic: no if-this-then-that, no databases, no dynamic pages.</p> 
+<p>CSS is used for the layout of your website, it can transform the basic black text on white background into something completely different. Everything that has to do with color, style, positioning (everything that you would call “design”) is done with CSS.</p> 
+<p>Here is a simple example:</p> 
+<pre><code class="language-css">body {
+	background: black;
+	color: white;
+}
+
+h1 {
+	font-size: 20px;
+	color: red;
+}
+
+p {
+	margin-top: 20px;
+}</code></pre> 
+<p>Again, there is no logic, no hard code to write. Just a bunch of pre-defined properties which are easy to learn. Together, HTML and CSS are the building blocks with which every website is created. Therefore, this should be the first step, your first thing to learn.</p> 
+<h3><a name="resources"></a>Resources</h3> 
+<ul> 
+ <li><a href="http://www.codecademy.com/tracks/web" target="_blank" rel="nofollow">Web Fundamentals at codecademy.com</a></li> 
+ <li><a href="http://htmldog.com/guides/html/beginner/" target="_blank" rel="nofollow">htmldog.com tutorials</a></li> 
+ <li><a href="http://docs.webplatform.org/wiki/html/tutorials" target="_blank" rel="nofollow">webplatform.org HTML tutorials</a></li> 
+ <li><a href="http://docs.webplatform.org/wiki/css/tutorials" target="_blank" rel="nofollow">webplatform.org CSS tutorials</a></li> 
+ <li><a href="http://www.w3schools.com/html/default.asp" target="_blank" rel="nofollow">w3schools.com HTML tutorials</a></li> 
+ <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="nofollow">Mozilla Developer Network: HTML</a></li> 
+ <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="nofollow">Mozilla Developer Network: CSS</a></li> 
+</ul> 
+<h2><a name="php"></a>PHP</h2> 
+<p>Like I said, HTML are CSS are not actual programming languages, you won’t be able to create “dynamic” websites, where some kind of logic can create different pages for different users. Think about a website where you can login with your account, where you can leave comments, where there’s a ton of articles or pictures coming from a database, etc.</p> 
+<p>That’s where the programming starts, and for me it started with learning PHP in 2001. Back then it was the most popular language for creating websites, but I wouldn’t recommend anyone starting out now to learn this. Better to start with a modern language like Python. So, no links to resources.</p> 
+<h2><a name="python-and-django"></a>Python and Django</h2> 
+<p>After I worked as a PHP developer for nine year I decided enough was enough; I needed something new. And this something new was to be Python, a popular language for creating dynamic websites. It’s also used to create apps, desktop software, games and much more. A perfect choice then with lots of room to grow and many available jobs (and usually better paying than PHP jobs too!).</p> 
+<p>When you want to build a website you normally choose a “framework”: a set of tools and functions that will make your life a lot easier. A bunch of smart people have done most of the heavy lifting: all the standard repetitive stuff like talking to a database, letting users log in, saving comments to a news article and much more is all taken care off.</p> 
+<p>Arguably one of the best frameworks for Python is Django. Definitely my recommendation to pick up, also because of the many jobs that are available for Django programmers.</p> 
+<h3><a name="resources"></a>Resources</h3> 
+<ul> 
+ <li><a href="https://www.codecademy.com/catalog/language/python" target="_blank" rel="nofollow">codecademy.com: Python</a></li> 
+ <li><a href="http://pythonmonk.com" target="_blank" rel="nofollow">Python Monk, interactive tutorials</a></li> 
+ <li><a href="https://docs.djangoproject.com" target="_blank" rel="nofollow">Django documentation, including tutorials</a></li> 
+ <li><a href="http://www.tangowithdjango.com" target="_blank" rel="nofollow">Tango With Django, online book</a></li> 
+ <li><a href="http://learnpythonthehardway.org/book/" target="_blank" rel="nofollow">Learn Python The Hard Way, online book</a></li> 
+ <li><a href="https://django.2scoops.org" target="_blank" rel="nofollow">Two Scoops of Django, book</a></li> 
+ <li><a href="http://docs.python-guide.org/en/latest/" target="_blank" rel="nofollow">The Hitchhiker’s Guide to Python</a></li> 
+ <li><a href="http://www.python.org/doc/" target="_blank" rel="nofollow">Official Python documentation</a></li> 
+ <li><a href="http://www.khanacademy.org/cs/tutorials/programming-basics" target="_blank" rel="nofollow">Programming Basics from khanacademy.org</a></li> 
+</ul> 
+<h2><a name="javascript"></a>Javascript</h2> 
+<p>Python (and PHP) are so-called server-side languages, which means that all the logic is executed on a web server. Every time the user clicks on a button (for example to login), a request is made to the server which does all the computing and then returns a new web page to your web browser. It’s a bit like ping-pong, where the client (the browser) and the server talk back and forth.</p> 
+<p>If you want to have some sort of logic or interactivity within the client you’ll need Javascript. With this you will be able to do stuff like animations, video players, interactive games and much more.</p> 
+<h3><a name="resources"></a>Resources</h3> 
+<ul> 
+ <li><a href="https://www.codecademy.com/learn/introduction-to-javascript" target="_blank" rel="nofollow">codecademy.com: Javascript</a></li> 
+ <li><a href="http://www.w3schools.com/js/default.asp" target="_blank" rel="nofollow">w3schools.com Javascript tutorials</a></li> 
+ <li><a href="http://learn.jquery.com" target="_blank" rel="nofollow">jQuery Learning Center</a></li> 
+ <li><a href="http://docs.webplatform.org/wiki/javascript/tutorials" target="_blank" rel="nofollow">webplatform.org Javascript tutorials</a></li> 
+ <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript" target="_blank" rel="nofollow">Mozilla Developer Network: Javascript</a></li> 
+</ul> 
+<h2><a name="objective-c"></a>Objective-C</h2> 
+<p>In 2010 I started to create iPhone and iPad apps, and for this I needed to learn another programming language: Objective-C. More than that though, creating apps is completely different from creating websites, there are so many new concepts to learn (memory management and background threads being the big two). Thankfully there are a lot of very good resources so getting started with iOS development isn’t too hard once you have some programming experience.</p> 
+<h3><a name="resources"></a>Resources</h3> 
+<ul> 
+ <li><a href="http://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/index.html" target="_blank" rel="nofollow">Apple’s Getting Started guide</a></li> 
+ <li><a href="https://itunes.apple.com/course/coding-together-developing/id593208016?l=en" target="_blank" rel="nofollow">Coding Together: Developing Apps for iPhone and iPad (Winter 2013)</a></li> 
+ <li><a href="https://developer.apple.com/wwdc/videos/" target="_blank" rel="nofollow">WWDC session videos</a></li> 
+ <li><a href="http://cocoadevcentral.com/articles/000081.php" target="_blank" rel="nofollow">C tutorial for Cocoa</a></li> 
+ <li><a href="http://cocoadevcentral.com/d/learn_objectivec/" target="_blank" rel="nofollow">Learn Objective-C</a></li> 
+</ul>
+				</div>
+				<ul class="pagination">
+					<li class="newer">
+						<a href="/articles/2013/review-ios-debuggers/" title="newer article">Review roundup: iOS debug tools and inspectors</a>
+					</li>
+					<li class="older">
+						<a href="/articles/2013/ios-development-three-years-later/" title="older article">iOS development: three years later</a>
+					</li>
+				</ul>
+			</article>
+			<div id="site-footer">
+				<p>
+					Copyright © Vanguard 2020-2024.
+				</p>
+				<p>
+					Built in Swift using
+					<a href="https://github.com/loopwerk/Saga" rel="nofollow" target="_blank">Saga</a>.
+				</p>
+				<p>
+					<a href="https://hachyderm.io/@kevinrenskers" rel="nofollow" target="_blank">Mastodon</a>
+					 | 
+					<a href="https://www.loopwerk.io/articles/feed.xml" rel="nofollow" target="_blank">RSS</a>
+				</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js">
+		</script>
+	</body>
+</html>
