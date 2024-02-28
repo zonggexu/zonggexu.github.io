@@ -8,7 +8,7 @@
 	<id>https://www.bt52.cn/articles/tag/feed.xml</id>
 	<link href="https://www.bt52.cn/articles/tag/feed.xml" rel="self">
 	</link>
-	<updated>2024-02-28T07:57:16Z</updated>
+	<updated>2024-02-28T12:39:40Z</updated>
 	<generator uri="https://github.com/loopwerk/Saga">
 		Saga
 	</generator>
@@ -29,15 +29,7 @@
 		</link>
 		<updated>2020-03-19T00:00:00Z</updated>
 		<summary type="text">
-			本文记录了《简单的逻辑学》基本概念 
- 
-最近阅读了一本逻辑学相关的书籍,受益颇多。 
-什么是逻辑学 
-逻辑学是研究推理和论证的一门学科，它旨在探究推理和论证的有效性标准，它是一门关于如何求真的学科。逻辑学的基本性质有形式性、外延性和工具性，其中形式性是研究自然语言表达的命题和推理背后所依据的逻辑形式，从而据此来分析命题真实性和推理有效性。 
-主要观点 
-1.全神贯注；观察是知识的重要来源。 
-2.事物的客观存在有两种形式：事物和物种； 
-事物：即存在的实体 如：动物植物等；...
+			本文记录了《简单的逻辑学》基本概念
 		</summary>
 	</entry>
 	<entry>
@@ -47,8 +39,7 @@
 		</link>
 		<updated>2020-03-17T00:00:00Z</updated>
 		<summary type="text">
-			人生 
-——从疫情开始到现在已经两个月了 在家也宅了两个月…  期待疫情早点结束 心都长草了哈哈 话说回来 宅在家里这么久也不算是个坏事 最起码可以好好陪陪父母了 从高中毕业到现在四年了 每年除了过年 基本上都不和父母生活在一起 时间也过的也真快 当兵两年 大学两年 仿佛昨日我才高考 而如今突然发现父亲的头发白了很多 一时间五味具杂 算起来我今年二十三了 还是一样的一事无成 这个可真让我无奈  不知道自己选择的这条路到底对不对 只能一步一步走 一步一步看 也没别的选择 虽然有那个出人头地的心...
+			一段人生感悟
 		</summary>
 	</entry>
 	<entry>
@@ -58,11 +49,7 @@
 		</link>
 		<updated>2019-08-12T00:00:00Z</updated>
 		<summary type="text">
-			Welcome to bobo! 欢迎您的到来！相关模块还在建设中… 也不知整点啥 反正就是瞎整hhh Relevant modules are still under constructionI don’t know what the whole point is, anyway, just a few blindness. 
-记录2019年8月12日构建第一个网站 
-参考文章 
-知乎GitHub+Hexo 搭建个人网站详细教程 
-操作步骤...
+			这是第一篇博客由hexo强力驱动
 		</summary>
 	</entry>
 </feed>
