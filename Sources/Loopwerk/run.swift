@@ -49,9 +49,9 @@ extension Item where M == ProjectMetadata {
 }
 
 enum SiteMetadata {
-  static let url = URL(string: "https://www.loopwerk.io")!
-  static let name = "Loopwerk"
-  static let author = "Kevin Renskers"
+  static let url = URL(string: "https://www.bt52.cn")!
+  static let name = "软件工程记事本"
+  static let author = "Vanguard"
   static let now = Date()
 }
 

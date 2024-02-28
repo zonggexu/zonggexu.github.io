@@ -1,5 +1,5 @@
 ---
-tags: review
+tags: 杂记
 summary: I bought the 12.9” iPad Pro with the Apple Pencil back in 2018 and spoiler alert: I still use the iPad almost every day.
 ---
 

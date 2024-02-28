@@ -6,7 +6,7 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
     article {
       div(class: "page_content opensource") {
         p {
-          "These are some of the more interesting open source projects I’ve created (or contributed to) over the years."
+          "这些是我多年来创建（或参与）的一些更有趣的开源项目。"
         }
 
         ["Swift", "JavaScript", "Objective-C", "Python", "Other"].map { category -> Node in
