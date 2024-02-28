@@ -1,5 +1,6 @@
 ---
 tags: 杂记
+summary: 这是第一篇博客由hexo强力驱动
 ---
 
 # Hello Myfriend!

@@ -6,7 +6,7 @@ func renderApps(context: ItemsRenderingContext<AppMetadata>) -> Node {
     article {
       div(class: "page_content") {
         p {
-          "Web and iOS apps I've worked on. Newest apps are shown first."
+          "我开发过的Web和iOS应用程序。最新的应用程序首先显示。"
         }
 
         context.items.map { app in
@@ -24,7 +24,7 @@ func renderApps(context: ItemsRenderingContext<AppMetadata>) -> Node {
             if let url = app.metadata.url {
               a(href: url, rel: "nofollow", target: "_blank") {
                 if url.contains(".apple.com") {
-                  "App Store"
+                  img(src: "/static/images/apple.svg")
                 } else {
                   "Website"
                 }

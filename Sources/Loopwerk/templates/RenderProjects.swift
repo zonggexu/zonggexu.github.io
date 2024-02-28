@@ -6,10 +6,10 @@ func renderProjects(context: ItemsRenderingContext<ProjectMetadata>) -> Node {
     article {
       div(class: "page_content opensource") {
         p {
-          "这些是我多年来创建（或参与）的一些更有趣的开源项目。"
+          "这些是我多年来收藏的一些更有趣的开源项目。"
         }
-
-        ["Swift", "JavaScript", "Objective-C", "Python", "Other"].map { category -> Node in
+          // 项目类别
+        ["Swift", "Other"].map { category -> Node in
           let projects = context.items.filter { $0.metadata.category == category }
           return renderCategory(category: category, projects: projects)
         }
