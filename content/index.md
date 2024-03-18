@@ -16,4 +16,4 @@ section: home
  🌏 You can access my [@github](https://github.com/zonggexu) for more information.
 
 
-*“再长的路,一步步也能走完,再短的路,不迈开双脚也无法到达.” &emsp;&emsp;- Vanguard, developer at Hello.world*
+*“再长的路,一步步也能走完,再短的路,不迈开双脚也无法到达.” &emsp;&emsp;- Vanguard, developer at Swift*
