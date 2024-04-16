@@ -8,22 +8,22 @@
 	<id>https://www.bt52.cn/articles/feed.xml</id>
 	<link href="https://www.bt52.cn/articles/feed.xml" rel="self">
 	</link>
-	<updated>2024-03-18T05:12:59Z</updated>
+	<updated>2024-04-16T16:18:56Z</updated>
 	<generator uri="https://github.com/loopwerk/Saga">
 		Saga
 	</generator>
 	<entry>
-		<title type="text">你好 review: 12.9” iPad Pro (2018)</title>
-		<id>https://www.bt52.cn/articles/2024/review-ipad-pro/</id>
-		<link href="https://www.bt52.cn/articles/2024/review-ipad-pro/" rel="alternate">
+		<title type="text">博客更新记</title>
+		<id>https://www.bt52.cn/articles/2024/blog-update/</id>
+		<link href="https://www.bt52.cn/articles/2024/blog-update/" rel="alternate">
 		</link>
-		<updated>2024-01-23T00:00:00Z</updated>
+		<updated>2024-04-17T00:00:00Z</updated>
 		<summary type="text">
-			I bought the 12.9” iPad Pro with the Apple Pencil back in 2018 and spoiler alert: I still use the iPad almost every day.
+			多年过去,我的Blog迎来重大更新 由过去的hexo更新到主力语言Swift框架Saga.
 		</summary>
 	</entry>
 	<entry>
-		<title type="text">2023 in review</title>
+		<title type="text">年终总结2023</title>
 		<id>https://www.bt52.cn/articles/2023/2023-in-review/</id>
 		<link href="https://www.bt52.cn/articles/2023/2023-in-review/" rel="alternate">
 		</link>
@@ -33,7 +33,7 @@
 		</summary>
 	</entry>
 	<entry>
-		<title type="text">2021 in review</title>
+		<title type="text">年终总结2021</title>
 		<id>https://www.bt52.cn/articles/2021/2021-in-review/</id>
 		<link href="https://www.bt52.cn/articles/2021/2021-in-review/" rel="alternate">
 		</link>

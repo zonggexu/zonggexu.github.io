@@ -12,7 +12,7 @@
 		<meta content="软件工程记事本" name="og:site_name"/>
 		<meta content="freelance, developer, swift, objective-c, django, python, iPhone, iPad, iOS, macOS, Apple, development, usability, design, css, html5, javascript, review, groningen" name="keywords"/>
 		<title>
-			软件工程记事本: Articles in random
+			软件工程记事本: 博客更新记
 		</title>
 		<link href="/static/style.css" rel="stylesheet"/>
 		<link href="/static/prism.css" rel="stylesheet"/>
@@ -21,7 +21,18 @@
 		<link href="/static/images/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
 		<link href="/static/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 		<link href="/static/not-home.css" rel="stylesheet"/>
-		<link href="/articles/tag/random/feed.xml" rel="alternate" title="软件工程记事本: articles with tag random" type="application/rss+xml"/>
+		<link href="https://www.bt52.cn/articles/2024/blog-update/" rel="canonical"/>
+		<meta content="多年过去,我的Blog迎来重大更新 由过去的hexo更新到主力语言Swift框架Saga." name="description"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="@kevinrenskers" name="twitter:site"/>
+		<meta content="https://www.bt52.cn/static/images/2024-04-17-blog-update.png" name="twitter:image"/>
+		<meta content="博客更新记" name="twitter:image:alt"/>
+		<meta content="https://www.bt52.cn/articles/2024/blog-update/" name="og:url"/>
+		<meta content="博客更新记" name="og:title"/>
+		<meta content="多年过去,我的Blog迎来重大更新 由过去的hexo更新到主力语言Swift框架Saga." name="og:description"/>
+		<meta content="https://www.bt52.cn/static/images/2024-04-17-blog-update.png" name="og:image"/>
+		<meta content="1014" name="og:image:width"/>
+		<meta content="530" name="og:image:height"/>
 		<script async data-domain="loopwerk.io" defer src="https://plausible.io/js/plausible.js">
 		</script>
 	</head>
@@ -46,36 +57,32 @@
 			</nav>
 		</header>
 		<div id="content">
-			<section>
+			<article>
 				<h1>
-					<a href="/articles/2023/2023-in-review/">年终总结2023</a>
+					博客更新记
 				</h1>
 				<div class="article_info">
-					<span class="time">December 29,
-						<a href="/articles/2023/">2023</a></span>1154 words, posted in <a href="/articles/tag/random/">random</a>
+					<span class="time">April 17,
+						<a href="/articles/2024/">2024</a></span>49 words, posted in <a href="/articles/tag//">杂记</a>
 				</div>
-				<p>
-					Another year in review - even though it feels like I wrote the previous one not so long ago. Time flies and it’s flying faster and faster each and every year.
-				</p>
-				<p class="more">
-					<a class="more" href="/articles/2023/2023-in-review/">read more</a>
-				</p>
-			</section>
-			<section>
-				<h1>
-					<a href="/articles/2021/2021-in-review/">年终总结2021</a>
-				</h1>
-				<div class="article_info">
-					<span class="time">December 29,
-						<a href="/articles/2021/">2021</a></span>1154 words, posted in <a href="/articles/tag/random/">random</a>
+				<div class="article_content">
+					<p><img src="/articles/images/ipad.jpg" alt=""></p> 
+<p>19年用hexo搭建的博客距今已经五年了 回想起刚开始大学期间兴致勃勃搭建博客的样子 多少有些感叹光阴如梭 如今我已在移动开发领域工作三年了 是时候更新一下博客框架了 这次选了Swift中的Saga. 也许是工作的原因 总感觉Swift的语法和其他语言相比更便捷 也更先进… 但这门Apple语言还是比较小众的 期待未来的Swift能在相关领域大展宏图吧…</p> 
+<p>Saga是用 Swift 编写的静态站点生成器，允许您为项目提供自己的元数据类型。 Saga 使用可扩展的读取器、渲染器和写入器系统，支持 Atom 提要、分页和强类型 HTML 模板等功能。它非常灵活：例如，您可以为博客上的文章拥有一组元数据，为投资组合中的应用程序拥有另一组元数据。同时它的配置也非常容易。</p> 
+<p>基本上照着作者给的demo改就行 各方面都还是很简单的</p> 
+<p>具有自动重新加载功能的开发服务器</p> 
+<p>npm install –global browser-sync<br> swift run watch content Sources deploy</p> 
+<p>这将构建网站并创建一个显示deploy文件夹内容的静态服务器。然后，它会监视content和Sources文件夹中的更改，重新创建网站并刷新浏览器。</p> 
+<p>以上是简单记录 后续补充…</p>
 				</div>
-				<p>
-					Welcome to the end of 2021, a.k.a. the second year of the pandemic. Another year of not going abroad, barely seeing friends, playing Dungeons &amp; Dragons via Zoom instead of at the table. A year of mild depression and feelings of loneliness. But also a year of hope when we all got access to the vaccines and when we didn&apos;t hear about Trump every day in the news. And last but not least: it was also a very productive year!
-				</p>
-				<p class="more">
-					<a class="more" href="/articles/2021/2021-in-review/">read more</a>
-				</p>
-			</section>
+				<ul class="pagination">
+					<li class="newer">
+					</li>
+					<li class="older">
+						<a href="/articles/2023/2023-in-review/" title="older article">年终总结2023</a>
+					</li>
+				</ul>
+			</article>
 			<div id="site-footer">
 				<p>
 					Copyright © Vanguard 2020-2024.
