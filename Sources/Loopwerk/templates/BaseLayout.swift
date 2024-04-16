@@ -60,9 +60,9 @@ func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeCo
                 a(class: "link_2\(section == .articles ? " active" : "")", href: "/articles/") { "文章" }
               }
 
-              li {
-                a(class: "link_3\(section == .apps ? " active" : "")", href: "/apps/") { "Apps" }
-              }
+//              li {
+//                a(class: "link_3\(section == .apps ? " active" : "")", href: "/apps/") { "Apps" }
+//              }
 
               li {
                 a(class: "link_4\(section == .projects ? " active" : "")", href: "/projects/") { "开源项目" }
