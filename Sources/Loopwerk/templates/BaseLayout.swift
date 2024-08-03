@@ -92,9 +92,7 @@ func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeCo
               %"."
             }
             p {
-              a(href: "https://hachyderm.io/@kevinrenskers", rel: "nofollow", target: "_blank") { "Mastodon" }
-              " | "
-              a(href: "\(SiteMetadata.url.absoluteString)/articles/feed.xml", rel: "nofollow", target: "_blank") { "RSS" }
+              a(href: "https://beian.miit.gov.cn/", rel: "nofollow", target: "_blank") { "冀ICP备2024080152号-1" }
             }
           }
         }
