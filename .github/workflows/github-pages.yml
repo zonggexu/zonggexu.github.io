@@ -10,9 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: 'swift:5.5'
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         
       - name: Build Swift Saga📱
         run: swift run
