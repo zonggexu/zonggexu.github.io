@@ -11,15 +11,15 @@ jobs:
     container:
       image: 'swift:5.5'
     steps:
-
+    
       - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
-          cache: 'npm'
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@main
           
-      - name: Checkout
-        uses: actions/checkout@v3
+   #   - name: Checkout
+    #    uses: actions/checkout@v3
         
       - name: Build Swift Saga📱
         run: swift run
