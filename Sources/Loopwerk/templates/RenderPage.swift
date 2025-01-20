@@ -26,18 +26,32 @@ func renderHome(body: String) -> Node {
       img(alt: "Loopwerk logo", src: "/static/images/Loopwerk.png")
     }
 
+//           h1 {
+//         Node.raw("""
+// A <b>good app</b> is like<br>
+// a <b>mechanical</b><br>
+// <b>watch</b>: lots of<br>
+// moving parts all<br>
+// working<br>
+// <b>together</b> to<br>
+// create a<br>
+// <b>beautiful</b> and<br>
+// <b>simple</b> interface.
+// """)
+//       }
+
     div(class: "content") {
       h1 {
         Node.raw("""
-A <b>good app</b> is like<br>
-a <b>mechanical</b><br>
-<b>watch</b>: lots of<br>
-moving parts all<br>
-working<br>
-<b>together</b> to<br>
-create a<br>
-<b>beautiful</b> and<br>
-<b>simple</b> interface.
+sorry <b>sorry</b>sorry<br>
+sorry <b>sorry</b><br>
+<b>sorry</b>sorry<br>
+sorry<br>
+sorry<br>
+<b>sorry</b>sorry<br>
+sorry<br>
+<b>sorry</b> sorry<br>
+<b>sorry</b> sorry.
 """)
       }
 

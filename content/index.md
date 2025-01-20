@@ -5,7 +5,7 @@ section: home
 # Home
 我是一位软件开发爱好者，拥有3年开发移动交互应用程序以及驱动这些应用程序的服务器的经验。
 
-这里将会记录关于软件工程的相关知识，计算机科学既壮观又幽美，我会尝试尽自己所能，以最恰当的方式来解释我所了解的某些代码。
+这里将会记录关于学习Saga的相关知识，计算机科学既壮观又幽美，我会尝试尽自己所能，以最恰当的方式来解释我所了解的某些代码。
 
  👋 Hi, I’m Vanguard.
  ✨ Familiar with Hello World writing in C, C++, Objective-C, Swift, JavaScript (TypeScript).
