@@ -3,33 +3,25 @@ name: Github Pages Build 🏗
 on:
   push:
     branches:
-    - main
-    
+      - main
+
 jobs:
   gh-pages:
     runs-on: ubuntu-latest
-    container:
-      image: 'swift:5.5'
     env:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
-      - name: Install updated GLIBC
-        run: |
-          curl -fsSL http://ftp.gnu.org/gnu/libc/glibc-2.28.tar.gz -o glibc-2.28.tar.gz
-          tar -xzf glibc-2.28.tar.gz
-          cd glibc-2.28
-          mkdir build
-          cd build
-          ../configure --prefix=/usr
-          make -j$(nproc)
-          sudo make install
-          
       - name: Checkout
         uses: actions/checkout@v3
-        
+
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: '5.5'
+
       - name: Build Swift Saga📱
         run: swift run
-        
+
       - name: Deploy 🌍
         uses: peaceiris/actions-gh-pages@v3
         with:
