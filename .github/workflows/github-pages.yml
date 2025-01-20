@@ -7,21 +7,19 @@ on:
 
 jobs:
   gh-pages:
-    runs-on: ubuntu-latest
-    env:
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+    runs-on: ubuntu-22.04  # 固定为 22.04
+    container:
+      # 这里要换成确保内含 glibc>=2.28 的镜像
+      # 比如 swift:5.5-focal (基于 Ubuntu 20.04)
+      image: swift:5.5-focal
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Setup Swift
-        uses: swift-actions/setup-swift@v2
-        with:
-          swift-version: '5.5'
-
+        
       - name: Build Swift Saga📱
-        run: swift run
-
+        run: swift build  # 或 swift run
+      
       - name: Deploy 🌍
         uses: peaceiris/actions-gh-pages@v3
         with:
