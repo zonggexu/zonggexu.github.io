@@ -1,5 +1,5 @@
-import HTML
 import Foundation
+import HTML
 
 enum Section: String {
   case home
@@ -37,14 +37,13 @@ func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeCo
         link(href: "/static/images/favicon-16x16.png", rel: "icon", sizes: "16x16", type: "image/png")
 
         switch section {
-          case .home:
-            link(href: "/static/home.css", rel: "stylesheet")
-          default:
-            link(href: "/static/not-home.css", rel: "stylesheet")
+        case .home:
+          link(href: "/static/home.css", rel: "stylesheet")
+        default:
+          link(href: "/static/not-home.css", rel: "stylesheet")
         }
 
         extraHeader
-        script(async: true, defer: true, src: "https://plausible.io/js/plausible.js", customAttributes: ["data-domain": "loopwerk.io"])
       }
       body {
         header {
@@ -96,11 +95,7 @@ func baseLayout(section: Section?, title pageTitle: String?, extraHeader: NodeCo
             }
           }
         }
-
-        script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js")
-        script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js")
-        script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js")
       }
-    }
+    },
   ]
 }
