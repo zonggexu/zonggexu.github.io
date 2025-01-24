@@ -1,6 +1,79 @@
 baseURL = 'https://www.swiftmiss.fun/'
-languageCode = 'en-us'
+author = "Vanguard"
+copyright = "© 2025, Vanguard"
+# 展示文章个数
+# paginate = 10
+# 语言
+languageCode = "en"
+DefaultContentLanguage = "en"
+enableInlineShortcodes = true
+
 title = '隔空想念'
 theme = "paper"
+
+ignoreErrors = ["error-remote-getjson"]
+
+
 [params]
-  color = 'light'
+    color = 'light'
+    github = 'zonggexu'
+    avatar = 'https://p11.douyinpic.com/aweme/1080x1080/aweme-avatar/mosaic-legacy_2dc0000052f71e8764d0a.jpeg?from=4010531038'
+    name = 'Vanguard'
+    bio = '个人介绍'
+
+favicon = "logo.png" 
+
+# ------------------------------
+
+# needed to  render raw HTML (e.g. <sub>, <sup>, <kbd>, <mark>)
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+#  [markup.highlight]
+#    lineNos = true
+
+[menu]
+
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 10
+  [[menu.main]]
+    identifier = "contact"
+    name = "Contact"
+    url = "/contact/"
+    weight = 10
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+[privacy]
+
+  [privacy.vimeo]
+    disabled = false
+    simple = true
+
+  [privacy.twitter]
+    disabled = false
+    enableDNT = true
+    simple = true
+
+  [privacy.instagram]
+    disabled = false
+    simple = true
+
+  [privacy.youtube]
+    disabled = false
+    privacyEnhanced = true
+
+[services]
+
+  [services.instagram]
+    disableInlineCSS = true
+
+  [services.twitter]
+    disableInlineCSS = true
