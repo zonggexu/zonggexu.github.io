@@ -28,8 +28,8 @@ jobs:
       - name: Deploy Web
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           EXTERNAL_REPOSITORY: zonggexu/zonggexu.github.io
-          publish_dir: ./public
-          publish_branch: main
+          PUBLISH_BRANCH: main
+          PUBLISH_DIR: ./public
           commit_message: ${{ github.event.head_commit.message }}
