@@ -23,7 +23,7 @@ jobs:
           hugo-version: "latest"
 
       - name: Build Web
-        un: hugo --gc --minify
+        run: hugo --gc --minify
       - name: Deploy Web
         uses: peaceiris/actions-gh-pages@v3
         with:
