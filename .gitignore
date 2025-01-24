@@ -1,8 +1,4 @@
 .DS_Store
-/.build
-/Packages
-/*.xcodeproj
-xcuserdata/
-*.py[cod]
-env
-deploy
+.hugo_build.lock
+public/
+static/_pagefind
