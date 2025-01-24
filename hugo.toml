@@ -1,0 +1,4 @@
+baseURL = 'https://www.swiftmiss.fun/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+theme = "paper"
