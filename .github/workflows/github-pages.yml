@@ -2,10 +2,8 @@ name: Github Pages Build 🏗
 
 on:
   push:
-  workflow_dispatch:
-  schedule:
-    # Runs everyday at 8:00 AM
-    - cron: "0 0 * * *"
+    branches:
+      - main
 
 jobs:
   build:
