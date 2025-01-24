@@ -2,28 +2,70 @@ name: Github Pages Build 🏗
 
 on:
   push:
-    branches:
-      - main
+  workflow_dispatch:
+  schedule:
+    # Runs everyday at 8:00 AM
+    - cron: "0 0 * * *"
 
 jobs:
-  gh-pages:
-    runs-on: ubuntu-22.04  # 固定为 22.04
-    container:
-      # 这里要换成确保内含 glibc>=2.28 的镜像
-      # 比如 swift:5.5-focal (基于 Ubuntu 20.04)
-      image: swift:5.5-focal
-
+  build:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        
-      - name: Build Swift Saga📱
-        run: swift run
-      
-      - name: Deploy 🌍
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - uses: actions/cache@v2
+        name: Configure pip caching
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install -r requirements.txt
+
+      - name: Update About Page
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        run: |-
+          python build_about.py
+          cat content/zh/about.md
+
+      - name: Commit and push if changed
+        run: |-
+          git diff
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add -A
+          git commit -m "ci: update about page (automatically)" || exit 0
+          git push
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 0.105.0
+          extended: true
+
+      - name: Build Web
+        run: hugo --gc --minify
+
+      - name: Run Pagefind
+        run: npm_config_yes=true npx pagefind --source "public"
+
+      - name: Deploy Web
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./deploy
-          cname: www.swiftmiss.fun
-          publish_branch: gh-pages
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          PUBLISH_BRANCH: cf-pages
+          PUBLISH_DIR: ./public
+          commit_message: ${{ github.event.head_commit.message }}
