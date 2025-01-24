@@ -1,4 +1,0 @@
-baseURL = 'https://www.swiftmiss.fun/'
-languageCode = 'en-us'
-title = 'My New Hugo Test Site'
-theme = 'paper'
