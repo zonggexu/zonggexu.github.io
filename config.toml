@@ -1,7 +1,7 @@
 baseURL = "https://www.swiftmiss.fun"
 # title = "Hugo Themes"
 author = "Vanguard"
-copyright = "© 2024, lee.so"
+copyright = "© 2024, Vanguard"
 paginate = 3
 languageCode = "en"
 DefaultContentLanguage = "en"
