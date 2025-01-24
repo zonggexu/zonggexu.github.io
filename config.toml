@@ -15,15 +15,18 @@ theme = "hugo-paper"
 title = "Paper"
 
 [params]
-  color = 'linen'
+  color = 'gray'
 
   twitter = 'nanxiaobei'
-  github = 'nanxiaobei'
+  github = 'github.com/zonggexu'
   instagram = 'nan.xiaobei'
 
-avatar = 'nanxiaobei@gmail.com'
-  name = 'Lee'
-  bio = 'Discover fresh context'
+avatar = 'zonggexu@gmail.com'
+  name = 'Vanguard'
+  bio = '个人介绍'
+
+favicon = "logo.png" 
+
 # ------------------------------
 
 # needed to  render raw HTML (e.g. <sub>, <sup>, <kbd>, <mark>)

@@ -1,4 +1,6 @@
 baseURL = 'https://www.swiftmiss.fun/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = '隔空想念'
 theme = "paper"
+[params]
+  color = 'light'
