@@ -46,3 +46,56 @@ Block math:
 $$
  \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
 $$
+
+
+### 一段思考
+
+```bash
+func (missAppHomeApi *MissAppHomeApi) CreateMissAppHome(c *gin.Context) {
+	var homeInDTO homeReq.AddHomeInDTO
+	err := c.ShouldBind(&homeInDTO)
+	if err != nil {
+		response.ErrorMessage(err.Error(), c)
+		return
+	}
+
+	tokenStr := c.Request.Header.Get("Authorization") //这里是个关键点，刷新token时也要带上token
+
+	claims, err1 := middleware.ParseAppToken(tokenStr)
+
+	userA, err2 := UserService.GetAppUserWithUUID(claims.Uid)
+	if err1 != nil || err2 != nil {
+		global.GVA_LOG.Error("创建失败!", zap.Error(err1))
+		response.ErrorMessage("用户不存在!", c)
+		return
+	}
+	
+	if userA.HomeId.lenth > 0 {
+		// 获取A home 返回
+	}
+
+	userB, err2 := UserService.GetAppUserWithAuthCode(homeInDTO.PairingCode)
+	if err2 != nil {
+		global.GVA_LOG.Error("配对码不正确创建家庭失败!", zap.Error(err2))
+		response.ErrorMessage("配对码不正确", c)
+		return
+	}
+	
+	if userB.HomeId.lenth > 0 {
+		global.GVA_LOG.Error("当前用户已有家庭!", zap.Error(err2))
+		response.ErrorMessage("当前用户已有家庭", c)
+		return
+	}
+
+	newHome := missAppHome.MissAppHome{UserPhoneA: userA.UserName, UserPhoneB: userB.UserName, HomeName: homeInDTO.HomeName, HomeScore: 0, UserA: userA, UserB: userB, TogetherDate: homeInDTO.TogetherDate}
+
+	err3 := HomeService.CreateMissAppHome(&newHome)
+	if err3 != nil {
+		response.ErrorMessage("创建家庭失败", c)
+		return
+	}
+
+	c.JSON(200, newHome)
+
+}
+```
