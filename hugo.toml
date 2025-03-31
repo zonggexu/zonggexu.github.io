@@ -20,8 +20,7 @@ ignoreErrors = ["error-remote-getjson"]
     avatar = 'https://p11.douyinpic.com/aweme/1080x1080/aweme-avatar/mosaic-legacy_2dc0000052f71e8764d0a.jpeg?from=4010531038'
     name = 'Vanguard'
     bio = '个人介绍'
-
-favicon = "logo.png" 
+    favicon = "favicon.png" 
 
 # ------------------------------
 
